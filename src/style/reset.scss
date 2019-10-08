@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: auto;
+}
+
+@import url('https://rsms.me/inter/inter.css');
+
+html {
+    font-family: 'Inter', San Francisco, Roboto, sans-serif;
+    font-size: 20px;
+    letter-spacing: -0.017em;
+    line-height: 1.45;
+    -webkit-text-size-adjust: 100%;
+}
+
+@supports (font-variation-settings: normal) {
+    html {
+        font-family: 'Inter var', sans-serif;
+    }
+}
+
+body {
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th,
+td {
+    text-align: left;
+    vertical-align: top;
+}
+
+img,
+iframe {
+    border: 0;
+}

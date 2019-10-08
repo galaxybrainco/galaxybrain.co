@@ -1,0 +1,55 @@
+@import './reset.scss';
+
+body {
+    margin: 20px auto;
+    max-width: 540px;
+}
+
+$link-top-color: #05299e;
+$link-bottom-color: #5448c8;
+
+$link-top-color-focus: #ffc100;
+$link-bottom-color-focus: #ff8200;
+
+$link-top-color-visited: #d90368;
+$link-bottom-color-visited: #820263;
+
+main {
+    margin: 20px;
+
+    a {
+        color: inherit;
+        position: relative;
+        font-weight: 500;
+        text-decoration: none;
+
+        background: linear-gradient(
+            white 65%,
+            rgba($link-top-color, 0.3) 65%,
+            rgba($link-bottom-color, 0.3)
+        );
+
+        &:hover,
+        &:focus {
+            outline: 0;
+            background: linear-gradient(
+                white 65%,
+                rgba($link-top-color-focus, 0.3) 65%,
+                rgba($link-bottom-color-focus, 0.3)
+            );
+        }
+
+        &:visited {
+            background: linear-gradient(
+                white 65%,
+                rgba($link-top-color-visited, 0.3) 65%,
+                rgba($link-bottom-color-visited, 0.3)
+            );
+        }
+    }
+}
+
+.site-logo {
+    display: block;
+    margin: 0 auto;
+}
