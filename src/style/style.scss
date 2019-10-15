@@ -1,55 +1,59 @@
 @import './reset.scss';
+@import './colors.scss';
 
 body {
     margin: 20px auto;
     max-width: 540px;
 }
 
-$link-top-color: #05299e;
-$link-bottom-color: #5448c8;
-
-$link-top-color-focus: #ffc100;
-$link-bottom-color-focus: #ff8200;
-
-$link-top-color-visited: #d90368;
-$link-bottom-color-visited: #820263;
+a {
+    color: inherit;
+    text-decoration: none;
+    outline: 0;
+}
 
 main {
     margin: 20px;
 
     a {
-        color: inherit;
-        position: relative;
-        font-weight: 500;
-        text-decoration: none;
+        border-bottom: 3px solid $blue;
 
-        background: linear-gradient(
-            white 65%,
-            rgba($link-top-color, 0.3) 65%,
-            rgba($link-bottom-color, 0.3)
-        );
-
-        &:hover,
-        &:focus {
-            outline: 0;
-            background: linear-gradient(
-                white 65%,
-                rgba($link-top-color-focus, 0.3) 65%,
-                rgba($link-bottom-color-focus, 0.3)
-            );
+        &:hover, &:focus {
+            animation: rainbow-flash-border-color 0.75s infinite;
         }
 
-        &:visited {
-            background: linear-gradient(
-                white 65%,
-                rgba($link-top-color-visited, 0.3) 65%,
-                rgba($link-bottom-color-visited, 0.3)
-            );
+        &:active {
+            border-color: $bright-red;
+        }
+
+        &visited {
+            border-color: $plum;
         }
     }
 }
 
+
 .site-logo {
-    display: block;
     margin: 0 auto;
+    width: 96px;
+    height: 96px;
+    background-color: #fff;
+    border-radius: 100%;
+    position: relative;
+
+    &-main {
+        display: block;
+    }
+}
+
+.cta-container {
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 3px solid $blue;
+    border-radius: 8px;
+    font-weight: bold;
 }

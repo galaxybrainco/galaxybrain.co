@@ -1,0 +1,63 @@
+$bright-red: #f15060;
+$orange: #ff6c2f;
+$sunflower: #ffb511;
+$green: #00a95c;
+$blue: #0078bf;
+$indigo: #484d7a;
+$plum: #845991;
+
+@mixin generate-rainbow-flash($property) {
+    @keyframes rainbow-flash-#{$property} {
+        0% {
+            #{$property}: $blue;
+        }
+        14% {
+            #{$property}: $blue;
+        }
+        14% {
+            #{$property}: $indigo;
+        }
+        28% {
+            #{$property}: $indigo;
+        }
+        28% {
+            #{$property}: $plum;
+        }
+        42% {
+            #{$property}: $plum;
+        }
+        42% {
+            #{$property}: $bright-red;
+        }
+        56% {
+            #{$property}: $bright-red;
+        }
+        56% {
+            #{$property}: $orange;
+        }
+        70% {
+            #{$property}: $orange;
+        }
+        70% {
+            #{$property}: $sunflower;
+        }
+        84% {
+            #{$property}: $sunflower;
+        }
+        84% {
+            #{$property}: $green;
+        }
+        98% {
+            #{$property}: $green;
+        }
+        98% {
+            #{$property}: $blue;
+        }
+        100% {
+            #{$property}: $blue;
+        }
+    }
+}
+
+@include generate-rainbow-flash(border-color);
+@include generate-rainbow-flash(background-color);

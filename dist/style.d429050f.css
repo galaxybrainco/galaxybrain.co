@@ -49,32 +49,155 @@ iframe {
   border: 0;
 }
 
+@keyframes rainbow-flash-border-color {
+  0% {
+    border-color: #0078bf;
+  }
+  14% {
+    border-color: #0078bf;
+  }
+  14% {
+    border-color: #484d7a;
+  }
+  28% {
+    border-color: #484d7a;
+  }
+  28% {
+    border-color: #845991;
+  }
+  42% {
+    border-color: #845991;
+  }
+  42% {
+    border-color: #f15060;
+  }
+  56% {
+    border-color: #f15060;
+  }
+  56% {
+    border-color: #ff6c2f;
+  }
+  70% {
+    border-color: #ff6c2f;
+  }
+  70% {
+    border-color: #ffb511;
+  }
+  84% {
+    border-color: #ffb511;
+  }
+  84% {
+    border-color: #00a95c;
+  }
+  98% {
+    border-color: #00a95c;
+  }
+  98% {
+    border-color: #0078bf;
+  }
+  100% {
+    border-color: #0078bf;
+  }
+}
+@keyframes rainbow-flash-background-color {
+  0% {
+    background-color: #0078bf;
+  }
+  14% {
+    background-color: #0078bf;
+  }
+  14% {
+    background-color: #484d7a;
+  }
+  28% {
+    background-color: #484d7a;
+  }
+  28% {
+    background-color: #845991;
+  }
+  42% {
+    background-color: #845991;
+  }
+  42% {
+    background-color: #f15060;
+  }
+  56% {
+    background-color: #f15060;
+  }
+  56% {
+    background-color: #ff6c2f;
+  }
+  70% {
+    background-color: #ff6c2f;
+  }
+  70% {
+    background-color: #ffb511;
+  }
+  84% {
+    background-color: #ffb511;
+  }
+  84% {
+    background-color: #00a95c;
+  }
+  98% {
+    background-color: #00a95c;
+  }
+  98% {
+    background-color: #0078bf;
+  }
+  100% {
+    background-color: #0078bf;
+  }
+}
 body {
   margin: 20px auto;
   max-width: 540px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  outline: 0;
 }
 
 main {
   margin: 20px;
 }
 main a {
-  color: inherit;
-  position: relative;
-  font-weight: 500;
-  text-decoration: none;
-  background: linear-gradient(white 65%, rgba(5, 41, 158, 0.3) 65%, rgba(84, 72, 200, 0.3));
+  border-bottom: 3px solid #0078bf;
 }
 main a:hover, main a:focus {
-  outline: 0;
-  background: linear-gradient(white 65%, rgba(255, 193, 0, 0.3) 65%, rgba(255, 130, 0, 0.3));
+  animation: rainbow-flash-border-color 0.75s infinite;
 }
-main a:visited {
-  background: linear-gradient(white 65%, rgba(217, 3, 104, 0.3) 65%, rgba(130, 2, 99, 0.3));
+main a:active {
+  border-color: #f15060;
+}
+main avisited {
+  border-color: #845991;
 }
 
 .site-logo {
-  display: block;
   margin: 0 auto;
+  width: 96px;
+  height: 96px;
+  background-color: #fff;
+  border-radius: 100%;
+  position: relative;
+}
+.site-logo-main {
+  display: block;
+}
+
+.cta-container {
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 3px solid #0078bf;
+  border-radius: 8px;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=/style.d429050f.css.map */
