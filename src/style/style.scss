@@ -1,9 +1,10 @@
 @import './reset.scss';
 @import './colors.scss';
+@import './animation.scss';
 
 body {
-    margin: 20px auto;
-    max-width: 540px;
+    margin: 16px auto 48px;
+    max-width: 576px;
 }
 
 a {
@@ -13,13 +14,13 @@ a {
 }
 
 main {
-    margin: 20px;
+    margin: 24px;
 
     a {
         border-bottom: 3px solid $blue;
 
         &:hover, &:focus {
-            animation: rainbow-flash-border-color 0.75s infinite;
+            animation: rainbow-flash-border-color $rainbow-flash-duration infinite;
         }
 
         &:active {
@@ -48,6 +49,7 @@ main {
 
 .cta-container {
     text-align: center;
+    margin-top: 32px;
 }
 
 .button {
@@ -56,4 +58,13 @@ main {
     border: 3px solid $blue;
     border-radius: 8px;
     font-weight: bold;
+
+    color: $blue;
+    border-color: $blue;
+
+    &:hover, &:visited {
+        animation:
+            rainbow-flash-border-color $rainbow-flash-duration infinite,
+            rainbow-flash-color $rainbow-flash-duration infinite;
+    }
 }

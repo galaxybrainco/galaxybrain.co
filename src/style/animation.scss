@@ -1,0 +1,59 @@
+@import './colors.scss';
+
+$rainbow-flash-duration: 1s;
+
+@mixin generate-rainbow-flash($property) {
+    @keyframes rainbow-flash-#{$property} {
+        0% {
+            #{$property}: $blue;
+        }
+        14% {
+            #{$property}: $blue;
+        }
+        14% {
+            #{$property}: $indigo;
+        }
+        28% {
+            #{$property}: $indigo;
+        }
+        28% {
+            #{$property}: $plum;
+        }
+        42% {
+            #{$property}: $plum;
+        }
+        42% {
+            #{$property}: $bright-red;
+        }
+        56% {
+            #{$property}: $bright-red;
+        }
+        56% {
+            #{$property}: $orange;
+        }
+        70% {
+            #{$property}: $orange;
+        }
+        70% {
+            #{$property}: $sunflower;
+        }
+        84% {
+            #{$property}: $sunflower;
+        }
+        84% {
+            #{$property}: $green;
+        }
+        98% {
+            #{$property}: $green;
+        }
+        98% {
+            #{$property}: $blue;
+        }
+        100% {
+            #{$property}: $blue;
+        }
+    }
+}
+
+@include generate-rainbow-flash(border-color);
+@include generate-rainbow-flash(color);

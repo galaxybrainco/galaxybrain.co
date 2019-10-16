@@ -99,59 +99,59 @@ iframe {
     border-color: #0078bf;
   }
 }
-@keyframes rainbow-flash-background-color {
+@keyframes rainbow-flash-color {
   0% {
-    background-color: #0078bf;
+    color: #0078bf;
   }
   14% {
-    background-color: #0078bf;
+    color: #0078bf;
   }
   14% {
-    background-color: #484d7a;
+    color: #484d7a;
   }
   28% {
-    background-color: #484d7a;
+    color: #484d7a;
   }
   28% {
-    background-color: #845991;
+    color: #845991;
   }
   42% {
-    background-color: #845991;
+    color: #845991;
   }
   42% {
-    background-color: #f15060;
+    color: #f15060;
   }
   56% {
-    background-color: #f15060;
+    color: #f15060;
   }
   56% {
-    background-color: #ff6c2f;
+    color: #ff6c2f;
   }
   70% {
-    background-color: #ff6c2f;
+    color: #ff6c2f;
   }
   70% {
-    background-color: #ffb511;
+    color: #ffb511;
   }
   84% {
-    background-color: #ffb511;
+    color: #ffb511;
   }
   84% {
-    background-color: #00a95c;
+    color: #00a95c;
   }
   98% {
-    background-color: #00a95c;
+    color: #00a95c;
   }
   98% {
-    background-color: #0078bf;
+    color: #0078bf;
   }
   100% {
-    background-color: #0078bf;
+    color: #0078bf;
   }
 }
 body {
-  margin: 20px auto;
-  max-width: 540px;
+  margin: 16px auto 48px;
+  max-width: 576px;
 }
 
 a {
@@ -161,13 +161,13 @@ a {
 }
 
 main {
-  margin: 20px;
+  margin: 24px;
 }
 main a {
   border-bottom: 3px solid #0078bf;
 }
 main a:hover, main a:focus {
-  animation: rainbow-flash-border-color 0.75s infinite;
+  animation: rainbow-flash-border-color 1s infinite;
 }
 main a:active {
   border-color: #f15060;
@@ -190,6 +190,7 @@ main avisited {
 
 .cta-container {
   text-align: center;
+  margin-top: 32px;
 }
 
 .button {
@@ -198,6 +199,11 @@ main avisited {
   border: 3px solid #0078bf;
   border-radius: 8px;
   font-weight: bold;
+  color: #0078bf;
+  border-color: #0078bf;
+}
+.button:hover, .button:visited {
+  animation: rainbow-flash-border-color 1s infinite, rainbow-flash-color 1s infinite;
 }
 
 /*# sourceMappingURL=/style.d429050f.css.map */
