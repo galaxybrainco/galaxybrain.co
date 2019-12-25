@@ -1,4 +1,27 @@
-@import url("https://rsms.me/inter/inter.css");
+@font-face {
+  font-family: "Space Mono Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Space Mono Regular"), url("/SpaceMono-Regular.9cd55824.woff") format("woff");
+}
+@font-face {
+  font-family: "Space Mono Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Space Mono Italic"), url("/SpaceMono-Italic.53c96d0d.woff") format("woff");
+}
+@font-face {
+  font-family: "Space Mono Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Space Mono Bold"), url("/SpaceMono-Bold.a07b4bd1.woff") format("woff");
+}
+@font-face {
+  font-family: "Space Mono Bold Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Space Mono Bold Italic"), url("/SpaceMono-BoldItalic.4ead8ce7.woff") format("woff");
+}
 * {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
@@ -8,18 +31,12 @@
 }
 
 html {
-  font-family: "Inter", San Francisco, Roboto, sans-serif;
-  font-size: 20px;
-  letter-spacing: -0.017em;
-  line-height: 1.45;
+  font-family: "Space Mono Regular", monospace;
+  font-size: 17px;
+  line-height: 1.5;
   -webkit-text-size-adjust: 100%;
 }
 
-@supports (font-variation-settings: normal) {
-  html {
-    font-family: "Inter var", sans-serif;
-  }
-}
 body {
   margin: 0;
 }
@@ -38,6 +55,15 @@ table {
   border-spacing: 0;
 }
 
+h2 {
+  font-family: "Space Mono Bold";
+  margin-top: 40px;
+  margin-bottom: 12px;
+}
+h2 + p {
+  margin-top: 12px;
+}
+
 th,
 td {
   text-align: left;
@@ -47,6 +73,10 @@ td {
 img,
 iframe {
   border: 0;
+}
+
+strong {
+  font-family: "Space Mono Bold";
 }
 
 @keyframes rainbow-flash-border-color {
@@ -152,6 +182,7 @@ iframe {
 body {
   margin: 16px auto 48px;
   max-width: 576px;
+  color: #020202;
 }
 
 a {
@@ -164,7 +195,7 @@ main {
   margin: 24px;
 }
 main a {
-  border-bottom: 3px solid #0078bf;
+  border-bottom: 3px solid #787878;
 }
 main a:hover, main a:focus {
   animation: rainbow-flash-border-color 1s infinite;
@@ -190,20 +221,28 @@ main avisited {
 
 .cta-container {
   text-align: center;
-  margin-top: 32px;
+  margin: 24px 0;
+}
+.cta-container .button {
+  margin: 8px;
 }
 
 .button {
   display: inline-block;
-  padding: 8px 16px;
-  border: 3px solid #0078bf;
-  border-radius: 8px;
-  font-weight: bold;
-  color: #0078bf;
-  border-color: #0078bf;
+  padding: 6px 12px;
+  border: 3px solid;
+  border-radius: 5px;
+  border-color: #787878;
+}
+.button ion-icon {
+  color: #787878;
+  font-size: 20px;
+  vertical-align: middle;
+  position: relative;
+  top: -1.5px;
 }
 .button:hover, .button:visited {
-  animation: rainbow-flash-border-color 1s infinite, rainbow-flash-color 1s infinite;
+  animation: rainbow-flash-border-color 1s infinite;
 }
 
 /*# sourceMappingURL=/style.d429050f.css.map */

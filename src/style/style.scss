@@ -5,6 +5,7 @@
 body {
     margin: 16px auto 48px;
     max-width: 576px;
+    color: $black;
 }
 
 a {
@@ -17,10 +18,12 @@ main {
     margin: 24px;
 
     a {
-        border-bottom: 3px solid $blue;
+        border-bottom: 3px solid $coal;
 
-        &:hover, &:focus {
-            animation: rainbow-flash-border-color $rainbow-flash-duration infinite;
+        &:hover,
+        &:focus {
+            animation: rainbow-flash-border-color $rainbow-flash-duration
+                infinite;
         }
 
         &:active {
@@ -32,7 +35,6 @@ main {
         }
     }
 }
-
 
 .site-logo {
     margin: 0 auto;
@@ -49,22 +51,29 @@ main {
 
 .cta-container {
     text-align: center;
-    margin-top: 32px;
+    margin: 24px 0;
+
+    .button { margin: 8px; }
 }
 
 .button {
     display: inline-block;
-    padding: 8px 16px;
-    border: 3px solid $blue;
-    border-radius: 8px;
-    font-weight: bold;
+    padding: 6px 12px;
+    border: 3px solid;
+    border-radius: 5px;
 
-    color: $blue;
-    border-color: $blue;
+    border-color: $coal;
 
-    &:hover, &:visited {
-        animation:
-            rainbow-flash-border-color $rainbow-flash-duration infinite,
-            rainbow-flash-color $rainbow-flash-duration infinite;
+    ion-icon {
+        color: $coal;
+        font-size: 20px;
+        vertical-align: middle;
+        position: relative;
+        top: -1.5px;
+    }
+
+    &:hover,
+    &:visited {
+        animation: rainbow-flash-border-color $rainbow-flash-duration infinite;
     }
 }

@@ -189,7 +189,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./../fonts/SpaceMono-Regular.woff":[["SpaceMono-Regular.9cd55824.woff","src/fonts/SpaceMono-Regular.woff"],"src/fonts/SpaceMono-Regular.woff"],"./../fonts/SpaceMono-Italic.woff":[["SpaceMono-Italic.53c96d0d.woff","src/fonts/SpaceMono-Italic.woff"],"src/fonts/SpaceMono-Italic.woff"],"./../fonts/SpaceMono-Bold.woff":[["SpaceMono-Bold.a07b4bd1.woff","src/fonts/SpaceMono-Bold.woff"],"src/fonts/SpaceMono-Bold.woff"],"./../fonts/SpaceMono-BoldItalic.woff":[["SpaceMono-BoldItalic.4ead8ce7.woff","src/fonts/SpaceMono-BoldItalic.woff"],"src/fonts/SpaceMono-BoldItalic.woff"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -217,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58892" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54543" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

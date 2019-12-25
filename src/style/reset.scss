@@ -1,3 +1,35 @@
+@font-face {
+    font-family: 'Space Mono Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Space Mono Regular'),
+        url('../fonts/SpaceMono-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Space Mono Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Space Mono Italic'),
+        url('../fonts/SpaceMono-Italic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Space Mono Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Space Mono Bold'),
+        url('../fonts/SpaceMono-Bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Space Mono Bold Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Space Mono Bold Italic'),
+        url('../fonts/SpaceMono-BoldItalic.woff') format('woff');
+}
+
 * {
     box-sizing: border-box;
     text-rendering: optimizeLegibility;
@@ -6,20 +38,11 @@
     font-kerning: auto;
 }
 
-@import url('https://rsms.me/inter/inter.css');
-
 html {
-    font-family: 'Inter', San Francisco, Roboto, sans-serif;
-    font-size: 20px;
-    letter-spacing: -0.017em;
-    line-height: 1.45;
+    font-family: 'Space Mono Regular', monospace;
+    font-size: 17px;
+    line-height: 1.5;
     -webkit-text-size-adjust: 100%;
-}
-
-@supports (font-variation-settings: normal) {
-    html {
-        font-family: 'Inter var', sans-serif;
-    }
 }
 
 body {
@@ -40,6 +63,16 @@ table {
     border-spacing: 0;
 }
 
+h2 {
+    font-family: 'Space Mono Bold';
+    margin-top: 40px;
+    margin-bottom: 12px;
+
+    + p {
+        margin-top: 12px;
+    }
+}
+
 th,
 td {
     text-align: left;
@@ -49,4 +82,8 @@ td {
 img,
 iframe {
     border: 0;
+}
+
+strong {
+    font-family: 'Space Mono Bold';
 }
