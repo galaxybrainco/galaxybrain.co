@@ -42,10 +42,32 @@ main {
     height: 96px;
     background-color: #fff;
     border-radius: 100%;
+    display: block;
     position: relative;
+
+    &:after {
+        content: '(Galaxy Brain)';
+        color: #999;
+        font-family: 'Space Mono Bold';
+        font-size: 11px;
+        text-transform: uppercase;
+
+        position: absolute;
+        bottom: -10px;
+        left: 3px;
+        width: 150px;
+
+        transition: opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    &:hover:after {
+        opacity: 1;
+    }
 
     &-main {
         display: block;
+        border-radius: 100%;
     }
 }
 
