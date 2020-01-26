@@ -1,0 +1,26 @@
+@import './colors.scss';
+.inspirations {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin: 0.5em 0 2em;
+    padding-left: 1em;
+
+    li {
+        padding-right: 2em;
+    }
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.prospectus-title {
+    margin: 1em -0.5em;
+    padding: 0.5em;
+
+    color: white;
+    background-color: $bright-red;
+
+}
