@@ -184,12 +184,12 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/style/style.scss":[function(require,module,exports) {
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/style/prospectus.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../fonts/SpaceMono-Regular.woff":[["SpaceMono-Regular.9cd55824.woff","src/fonts/SpaceMono-Regular.woff"],"src/fonts/SpaceMono-Regular.woff"],"./../fonts/SpaceMono-Italic.woff":[["SpaceMono-Italic.53c96d0d.woff","src/fonts/SpaceMono-Italic.woff"],"src/fonts/SpaceMono-Italic.woff"],"./../fonts/SpaceMono-Bold.woff":[["SpaceMono-Bold.a07b4bd1.woff","src/fonts/SpaceMono-Bold.woff"],"src/fonts/SpaceMono-Bold.woff"],"./../fonts/SpaceMono-BoldItalic.woff":[["SpaceMono-BoldItalic.4ead8ce7.woff","src/fonts/SpaceMono-BoldItalic.woff"],"src/fonts/SpaceMono-BoldItalic.woff"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -394,4 +394,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/style.d429050f.js.map
+//# sourceMappingURL=/prospectus.3ccc19c7.js.map
