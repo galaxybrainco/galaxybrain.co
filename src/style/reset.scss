@@ -1,33 +1,25 @@
 @font-face {
-    font-family: 'Space Mono Regular';
+    font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: normal;
-    src: local('Space Mono Regular'),
-        url('../fonts/SpaceMono-Regular.woff') format('woff');
+    src: local('JetBrainsMono Mono Regular'),
+        url('../fonts/JetBrainsMono-Regular.woff') format('woff');
 }
 
 @font-face {
-    font-family: 'Space Mono Italic';
-    font-style: normal;
+    font-family: 'JetBrains Mono';
+    font-style: italic;
     font-weight: normal;
-    src: local('Space Mono Italic'),
-        url('../fonts/SpaceMono-Italic.woff') format('woff');
+    src: local('JetBrainsMono Mono Italic'),
+        url('../fonts/JetBrainsMono-Italic.woff') format('woff');
 }
 
 @font-face {
-    font-family: 'Space Mono Bold';
+    font-family: 'JetBrains Mono';
     font-style: normal;
-    font-weight: normal;
-    src: local('Space Mono Bold'),
-        url('../fonts/SpaceMono-Bold.woff') format('woff');
-}
-
-@font-face {
-    font-family: 'Space Mono Bold Italic';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Space Mono Bold Italic'),
-        url('../fonts/SpaceMono-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    src: local('JetBrainsMono Mono Bold'),
+        url('../fonts/JetBrainsMono-Bold.woff') format('woff');
 }
 
 * {
@@ -39,7 +31,7 @@
 }
 
 html {
-    font-family: 'Space Mono Regular', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 17px;
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
@@ -65,7 +57,7 @@ table {
 
 
 h1 {
-    font-family: 'Space Mono Bold';
+    font-weight: bold;
     font-size: 27px;
     line-height: 33px;
     text-transform: uppercase;
@@ -78,7 +70,7 @@ h1 {
 }
 
 h2 {
-    font-family: 'Space Mono Bold';
+    font-weight: bold;
     font-size: 23px;
     line-height: 27px;
     margin-top: 46px;
@@ -90,7 +82,7 @@ h2 {
 }
 
 h3 {
-    font-family: 'Space Mono Bold';
+    font-weight: bold;
     font-size: 17px;
     text-transform: uppercase;
     margin-top: 34px;
@@ -113,7 +105,7 @@ iframe {
 }
 
 strong {
-    font-family: 'Space Mono Bold';
+    font-weight: bold;
 }
 
 li {

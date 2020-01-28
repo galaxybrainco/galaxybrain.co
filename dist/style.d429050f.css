@@ -1,26 +1,20 @@
 @font-face {
-  font-family: "Space Mono Regular";
+  font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: normal;
-  src: local("Space Mono Regular"), url("/SpaceMono-Regular.9cd55824.woff") format("woff");
+  src: local("JetBrainsMono Mono Regular"), url("/JetBrainsMono-Regular.b7432a93.woff") format("woff");
 }
 @font-face {
-  font-family: "Space Mono Italic";
-  font-style: normal;
+  font-family: "JetBrains Mono";
+  font-style: italic;
   font-weight: normal;
-  src: local("Space Mono Italic"), url("/SpaceMono-Italic.53c96d0d.woff") format("woff");
+  src: local("JetBrainsMono Mono Italic"), url("/JetBrainsMono-Italic.e5d3a3bc.woff") format("woff");
 }
 @font-face {
-  font-family: "Space Mono Bold";
+  font-family: "JetBrains Mono";
   font-style: normal;
-  font-weight: normal;
-  src: local("Space Mono Bold"), url("/SpaceMono-Bold.a07b4bd1.woff") format("woff");
-}
-@font-face {
-  font-family: "Space Mono Bold Italic";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Space Mono Bold Italic"), url("/SpaceMono-BoldItalic.4ead8ce7.woff") format("woff");
+  font-weight: bold;
+  src: local("JetBrainsMono Mono Bold"), url("/JetBrainsMono-Bold.c9cf9808.woff") format("woff");
 }
 * {
   box-sizing: border-box;
@@ -31,7 +25,7 @@
 }
 
 html {
-  font-family: "Space Mono Regular", monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 17px;
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
@@ -56,7 +50,7 @@ table {
 }
 
 h1 {
-  font-family: "Space Mono Bold";
+  font-weight: bold;
   font-size: 27px;
   line-height: 33px;
   text-transform: uppercase;
@@ -68,7 +62,7 @@ h1 + p {
 }
 
 h2 {
-  font-family: "Space Mono Bold";
+  font-weight: bold;
   font-size: 23px;
   line-height: 27px;
   margin-top: 46px;
@@ -79,7 +73,7 @@ h2 + p {
 }
 
 h3 {
-  font-family: "Space Mono Bold";
+  font-weight: bold;
   font-size: 17px;
   text-transform: uppercase;
   margin-top: 34px;
@@ -101,7 +95,7 @@ iframe {
 }
 
 strong {
-  font-family: "Space Mono Bold";
+  font-weight: bold;
 }
 
 li {
@@ -248,8 +242,8 @@ main avisited {
 .site-logo:after {
   content: "(Galaxy Brain)";
   color: #999;
-  font-family: "Space Mono Bold";
   font-size: 11px;
+  font-weight: bold;
   text-transform: uppercase;
   position: absolute;
   bottom: -10px;
