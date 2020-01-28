@@ -9,8 +9,8 @@
   },
   "scripts": {
     "dev": "parcel dev *.html",
-    "build": "parcel build *.html",
-    "deploy": "git subtree push --prefix dist origin gh-pages",
+    "build": "parcel build *.html && cp src/CNAME dist/CNAME",
+    "deploy": "npm run -s build && cd dist && git commit -am \"Build output as of $(git log '--format=format:%H' master -1))\" && git push origin gh-pages && cd ../",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Galaxy Brain",
