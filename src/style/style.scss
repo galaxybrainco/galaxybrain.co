@@ -2,6 +2,12 @@
 @import './colors.scss';
 @import './animation.scss';
 
+%little-text {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 body {
     margin: 16px auto 48px;
     max-width: 576px;
@@ -46,11 +52,9 @@ main {
     position: relative;
 
     &:after {
+        @extend %little-text;
         content: '(Galaxy Brain)';
         color: #999;
-        font-size: 11px;
-        font-weight: bold;
-        text-transform: uppercase;
 
         position: absolute;
         bottom: -10px;
@@ -75,7 +79,55 @@ main {
     text-align: center;
     margin: 24px 0;
 
-    .button { margin: 8px; }
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    .button {
+        margin: 8px;
+    }
+}
+
+.news-container {
+    position: relative;
+    margin: 48px -16px 16px;
+    padding: 0 16px 16px;
+
+    box-shadow: 0 0 1px rgba(0, 0, 6, 0.2), 0 2px 34px rgba(0, 0, 6, 0.15);
+    background-image: linear-gradient(rgba($blue, 0.1) .07em, transparent .07em);
+    background-size: 100% 25.5px;
+    background-position: 0 26px;
+
+    transform: rotate(-0.5deg);
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: $white;
+        height: 16px;
+    }
+
+    &-header {
+        @extend %little-text;
+        position: relative;
+        margin: 0 -16px;
+        padding: 8px 16px;
+        border-bottom: 1px solid $bright-red;
+        background-color: $white;
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background-color: $white;
+        }
+    }
 }
 
 .button {
@@ -84,6 +136,7 @@ main {
     border: 3px solid;
     border-radius: 5px;
 
+    background-color: $white;
     border-color: $coal;
 
     ion-icon {
