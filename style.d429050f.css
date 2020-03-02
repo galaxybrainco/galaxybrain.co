@@ -1,26 +1,20 @@
 @font-face {
-  font-family: "Space Mono Regular";
+  font-family: "JetBrains Mono";
   font-style: normal;
   font-weight: normal;
-  src: local("Space Mono Regular"), url("/SpaceMono-Regular.9cd55824.woff") format("woff");
+  src: local("JetBrainsMono Mono Regular"), url("/JetBrainsMono-Regular.b7432a93.woff") format("woff");
 }
 @font-face {
-  font-family: "Space Mono Italic";
-  font-style: normal;
+  font-family: "JetBrains Mono";
+  font-style: italic;
   font-weight: normal;
-  src: local("Space Mono Italic"), url("/SpaceMono-Italic.53c96d0d.woff") format("woff");
+  src: local("JetBrainsMono Mono Italic"), url("/JetBrainsMono-Italic.e5d3a3bc.woff") format("woff");
 }
 @font-face {
-  font-family: "Space Mono Bold";
+  font-family: "JetBrains Mono";
   font-style: normal;
-  font-weight: normal;
-  src: local("Space Mono Bold"), url("/SpaceMono-Bold.a07b4bd1.woff") format("woff");
-}
-@font-face {
-  font-family: "Space Mono Bold Italic";
-  font-style: normal;
-  font-weight: normal;
-  src: local("Space Mono Bold Italic"), url("/SpaceMono-BoldItalic.4ead8ce7.woff") format("woff");
+  font-weight: bold;
+  src: local("JetBrainsMono Mono Bold"), url("/JetBrainsMono-Bold.c9cf9808.woff") format("woff");
 }
 * {
   box-sizing: border-box;
@@ -31,7 +25,7 @@
 }
 
 html {
-  font-family: "Space Mono Regular", monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 17px;
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
@@ -56,7 +50,7 @@ table {
 }
 
 h1 {
-  font-family: "Space Mono Bold";
+  font-weight: bold;
   font-size: 27px;
   line-height: 33px;
   text-transform: uppercase;
@@ -68,7 +62,7 @@ h1 + p {
 }
 
 h2 {
-  font-family: "Space Mono Bold";
+  font-weight: bold;
   font-size: 23px;
   line-height: 27px;
   margin-top: 46px;
@@ -79,7 +73,7 @@ h2 + p {
 }
 
 h3 {
-  font-family: "Space Mono Bold";
+  font-weight: bold;
   font-size: 17px;
   text-transform: uppercase;
   margin-top: 34px;
@@ -101,7 +95,7 @@ iframe {
 }
 
 strong {
-  font-family: "Space Mono Bold";
+  font-weight: bold;
 }
 
 li {
@@ -208,6 +202,12 @@ li {
     color: #0078bf;
   }
 }
+.news-container-header, .site-logo:after {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 body {
   margin: 16px auto 48px;
   max-width: 576px;
@@ -224,7 +224,7 @@ main {
   margin: 24px;
 }
 main a {
-  border-bottom: 3px solid #787878;
+  border-bottom: 2px solid #787878;
 }
 main a:hover, main a:focus {
   animation: rainbow-flash-border-color 1s infinite;
@@ -248,9 +248,6 @@ main avisited {
 .site-logo:after {
   content: "(Galaxy Brain)";
   color: #999;
-  font-family: "Space Mono Bold";
-  font-size: 11px;
-  text-transform: uppercase;
   position: absolute;
   bottom: -10px;
   left: 3px;
@@ -270,15 +267,55 @@ main avisited {
   text-align: center;
   margin: 24px 0;
 }
+.cta-container:last-child {
+  margin-bottom: 0;
+}
 .cta-container .button {
   margin: 8px;
+}
+
+.news-container {
+  position: relative;
+  margin: 48px -16px 16px;
+  padding: 0 16px 16px;
+  box-shadow: 0 0 1px rgba(0, 0, 6, 0.2), 0 2px 34px rgba(0, 0, 6, 0.15);
+  background-image: linear-gradient(rgba(0, 120, 191, 0.1) 0.07em, transparent 0.07em);
+  background-size: 100% 25.5px;
+  background-position: 0 26px;
+  transform: rotate(-0.5deg);
+}
+.news-container:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  height: 16px;
+}
+.news-container-header {
+  position: relative;
+  margin: 0 -16px;
+  padding: 8px 16px;
+  border-bottom: 1px solid #f15060;
+  background-color: #ffffff;
+}
+.news-container-header:after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background-color: #ffffff;
 }
 
 .button {
   display: inline-block;
   padding: 6px 12px;
-  border: 3px solid;
-  border-radius: 5px;
+  border: 2px solid;
+  border-radius: 4px;
+  background-color: #ffffff;
   border-color: #787878;
 }
 .button ion-icon {
