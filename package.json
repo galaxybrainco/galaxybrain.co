@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "parcel dev *.html",
     "build": "parcel build *.html && cp src/CNAME dist/CNAME",
-    "deploy": "npm run -s build && cd dist && git add --all && git commit -m \"Build output as of $(git log '--format=format:%H' master -1))\" && git push origin gh-pages --force && cd ../",
+    "deploy": "npm run -s build && mkdir tmp && cp dist/* tmp/ && git checkout gh-pages && cp tmp/* . && rm -rf tmp && git add --all && git commit -m \"Build output as of $(git log '--format=format:%H' master -1)\" && git push origin gh-pages --force && git checkout master",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Galaxy Brain",
