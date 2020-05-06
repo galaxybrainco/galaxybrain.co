@@ -8,7 +8,7 @@
     "url": "git+https://github.com/galaxybrainco/galaxybrain.co.git"
   },
   "scripts": {
-    "dev": "parcel dev *.html",
+    "dev": "parcel dev *.html projects/*.html",
     "build": "parcel build *.html && cp src/CNAME dist/CNAME",
     "deploy": "rm -rf tmp && npm run -s build && mkdir tmp && cp dist/* tmp/ && git checkout gh-pages && cp tmp/* . && rm -rf tmp && git add --all && git commit -m \"Build output as of $(git log '--format=format:%H' master -1)\" && git push origin gh-pages --force && git checkout master",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,6 @@
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "prettier": "1.18.2",
-    "sass": "^1.23.0"
+    "sass": "^1.26.5"
   }
 }
