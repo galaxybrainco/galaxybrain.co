@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Galaxy Brain</title>
+        <style>{% include "css/style.css" ignore missing %}</style>
+    </head>
+    <body>
+    {% block header %}
+    <header class="site-banner">
+        <a class="site-logo" href="/">
+            <img
+                class="site-logo-main"
+                alt="Galaxy Brain"
+                width="96"
+                height="96"
+                src="./img/brian.png"
+            />
+        </a>
+    </header>
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% block scripts %}
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <script data-goatcounter="https://galaxybrain.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    {% endblock %}
+    </body>
+</html>

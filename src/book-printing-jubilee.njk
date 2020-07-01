@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Galaxy Brain's Book Printing Jubilee</title>
-    <link rel="stylesheet" href="./src/style/style.scss" />
-</head>
-<body>
-    <header class="site-banner">
-        <a class="site-logo" href="/">
-            <img class="site-logo-main" alt="Galaxy Brain" width="96" height="96" src="./src/img/brian.png" />
-        </a>
-    </header>
+---
+permalink: book-printing-jubilee.html
+---
+{% extends "layouts/base.njk" %}
+
+{% block content %}
     <main>
         <h1>Book Printing Jubilee</h1>
         <p>UPDATE: This event was cancelled due to the COVID-19 Shelter In Place order</p>
@@ -22,6 +14,4 @@
         <p><strong>What:</strong> Free access to our Risograph and materials for the purpose of creating books that we will sell for you in the Ephemeral Bookstore. We’ll also give you copies to take home.</p>
         <p>To make this abundantly clear, we’re offering to print your zine or small book or pamphlet or art print at no cost to you. The only thing you need to agree to is letting us sell your work in the store, which we will also pay you royalties for. Swing by any time during that window, and we’ll help you get a book published. If you want to pre-plan your book, you’re welcome to email <a href="mailto:hello@galaxybrain.co">hello@galaxybrain.co</a>. Please invite anyone you think might be interested, and we hope to see you all on March 28th.</p>
     </main>
-    <script data-goatcounter="https://galaxybrain.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-</body>
-</html>
+{% endblock %}
