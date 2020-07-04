@@ -2,14 +2,18 @@
   "name": "galaxybrain.co",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "src/index.njk",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/galaxybrainco/galaxybrain.co.git"
   },
   "scripts": {
-    "dev": "parcel dev *.html projects/*.html",
-    "build": "parcel build *.html && cp src/CNAME dist/CNAME",
+    "sass": "sass --style=compressed src/style/style.scss src/_includes/css/style.css",
+    "serve": "npx eleventy --serve",
+    "watch:eleventy": "eleventy --serve",
+    "watch:sass": "npm run sass -- --watch",
+    "dev": "npm-run-all sass --parallel watch:*",
+    "build": "npm run sass && eleventy",
     "deploy": "rm -rf tmp && npm run -s build && mkdir tmp && cp dist/* tmp/ && git checkout gh-pages && cp tmp/* . && rm -rf tmp && git add --all && git commit -m \"Build output as of $(git log '--format=format:%H' master -1)\" && git push origin gh-pages --force && git checkout master",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,8 +24,10 @@
   },
   "homepage": "https://github.com/galaxybrainco/galaxybrain.co#readme",
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "prettier": "1.18.2",
-    "sass": "^1.26.5"
+    "@11ty/eleventy": "^0.11.0",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "sass": "^1.26.9"
   }
 }
