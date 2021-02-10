@@ -93,7 +93,10 @@ main {
     margin: 48px -16px 16px;
     padding: 0 16px 16px;
 
-    box-shadow: 0 0 1px rgba(0, 0, 6, 0.2), 0 2px 34px rgba(0, 0, 6, 0.15);
+    box-shadow:
+        0 0 1px rgba(0, 0, 6, 0.2),
+        0 3px 4px rgba(0, 0, 4, 0.17),
+        0 2px 34px rgba(0, 0, 6, 0.15);
     background-image: linear-gradient(rgba($blue, 0.1) .07em, transparent .07em);
     background-size: 100% 25.5px;
     background-position: 0 26px;
@@ -144,7 +147,7 @@ main {
         font-size: 20px;
         vertical-align: middle;
         position: relative;
-        top: -1.5px;
+        top: -1px;
     }
 
     &:hover,
