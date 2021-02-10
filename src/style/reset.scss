@@ -1,25 +1,25 @@
 @font-face {
-    font-family: 'JetBrains Mono';
+    font-family: 'ISO';
     font-style: normal;
     font-weight: normal;
-    src: local('JetBrainsMono Mono Regular'),
-        url('../fonts/JetBrainsMono-Regular.woff') format('woff');
+    src: local('ISO'),
+        url('../fonts/ISOv0.8-Regular.woff') format('woff');
 }
 
 @font-face {
-    font-family: 'JetBrains Mono';
+    font-family: 'ISO';
     font-style: italic;
     font-weight: normal;
-    src: local('JetBrainsMono Mono Italic'),
-        url('../fonts/JetBrainsMono-Italic.woff') format('woff');
+    src: local('ISO'),
+        url('../fonts/ISOv0.8-RegularItalic.woff') format('woff');
 }
 
 @font-face {
-    font-family: 'JetBrains Mono';
+    font-family: 'ISO';
     font-style: normal;
     font-weight: bold;
-    src: local('JetBrainsMono Mono Bold'),
-        url('../fonts/JetBrainsMono-Bold.woff') format('woff');
+    src: local('ISO'),
+        url('../fonts/ISOv0.8-Bold.woff') format('woff');
 }
 
 * {
@@ -31,7 +31,7 @@
 }
 
 html {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'ISO', monospace;
     font-size: 17px;
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
