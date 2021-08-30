@@ -1,0 +1,387 @@
+<article id="post-508" class="post-508 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">1.2 Player object intro</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <h2>Picking a sound</h2>
+
+        <p>
+            When FoxDot boots up it reserves all lower-case, two-character
+            variable names, e.g.&nbsp;<code>aa</code>,&nbsp;<code>p1</code>,
+            and&nbsp;<code>bd</code>, to be used as “players”. These are the
+            objects that play sounds for us based on instructions we give them.
+            The first instruction we give it telling it what instrument (synth)
+            to play. To see a list of all available synths, evaluate the
+            following:
+        </p>
+
+        <div>
+            <div id="highlighter_815153" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(SynthDefs)</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            This is short for Synth Definition. Choose one and assign it to a
+            FoxDot player object using two “greater than” signs, aka a “double
+            arrow”. If my chosen&nbsp;<code>SynthDef</code> was “pluck” and my
+            chosen player object was&nbsp;<code>p1</code>&nbsp;then I would
+            assign “pluck” to&nbsp;<code>p1</code> like so:
+        </p>
+
+        <div>
+            <div id="highlighter_953687" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck()</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Make sure you include the brackets at the end of “pluck” or it won’t
+            work. To stop an individual player object, simply execute
+            <code>p1.stop()</code>. To stop all player objects, you can
+            press&nbsp;<code>Ctrl+.</code>, which is a shortcut for the
+            command&nbsp;<code>Clock.clear()</code>.
+        </p>
+
+        <h2>Assigning Instructions</h2>
+
+        <p>
+            The&nbsp;<code>&gt;&gt;</code>&nbsp;in Python is usually reserved
+            for a type of operation, like how a ‘+’ symbol is used for addition,
+            but it is not the case in FoxDot, and the reason will become clear
+            shortly. By adding arguments in the brackets, you can change the
+            notes being played back. The first argument, the note pitch
+            (sometimes referred to as degree), doesn’t need to be named
+            explicitly, but you’ll need to specify other attributes (such as
+            duration) if you want to change them. These values can be a single
+            value or a list of values that the player will play in turn. For
+            example, the code below plays three notes in turn continuously
+            until&nbsp;<code>p1</code>&nbsp;is stopped:
+        </p>
+
+        <div>
+            <div id="highlighter_449987" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">], amp</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">) </code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            The first argument is the pitch of the note we want to play, which
+            is a list of 3 numbers; 0, 2, and 4. The player will play each of
+            these in turn. By default all players will use the C-Major scale,
+            which we can think of as a Python list:
+        </p>
+
+        <pre class="wp-block-preformatted">CMajor = [C, D, E, F, G, A, B] </pre>
+
+        <p>
+            The numbers we use for pitch refer to the index of the notes we want
+            to pick from this scale. So, with our list of pitches&nbsp;<code
+                >[0, 2,&nbsp;4]</code
+            >&nbsp;our notes would be:
+        </p>
+
+        <pre class="wp-block-preformatted">
+CMajor[0] =&gt; C
+CMajor[2] =&gt; E
+CMajor[4] =&gt; G</pre
+        >
+
+        <p>
+            The duration of these notes are derived from
+            the&nbsp;<code>dur</code>&nbsp;keyword argument, which is also a
+            list of three numbers; 1, 1/2, and 1/2. The position of these values
+            relate to the position of the values we supplied for pitch. So the
+            first note will last for 1 beat and the next two notes will last for
+            half of 1 beat. The last keyword
+            argument,&nbsp;<code>amp</code>&nbsp;is used to set the amplitude
+            (loudness) of the note, where 0 is silent and 1 is louder. You’ll be
+            able to find out about other keywords you can use in the Players
+            Attributes section.
+        </p>
+
+        <p>
+            You can also add values to the Player to create variation in your
+            sequences or even play chords. For example, the code below will play
+            every 3 note 4 pitches higher:
+        </p>
+
+        <div>
+            <div id="highlighter_541710" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">) </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">] </code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            To create chords, use a tuple in place of a list. The code below
+            will add a basic triad to each note played:
+        </p>
+
+        <div>
+            <div id="highlighter_651693" class="syntaxhighlighter powershell">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="powershell plain"
+                                            >p1 &gt;&gt; pluck([0, 1, 2, 3],
+                                            dur=2) + (0, 2, 4)
+                                        </code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h2>Playing Samples</h2>
+
+        <p>
+            FoxDot can also play audio samples, such as percussion, using a
+            special SynthDef called&nbsp;<code>play</code>. Instead of taking a
+            list of numbers as its first argument it takes a string of
+            characters where each character relates to a different sound. Here’s
+            an example of a very basic drum pattern:
+        </p>
+
+        <div>
+            <div id="highlighter_610185" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">) </code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            The string can also contain information
+            about&nbsp;<em>how</em>&nbsp;the sequence should be played, which is
+            done by using different types of brackets. Putting two or more
+            characters in round brackets will alternate which sound to play on
+            each loop through the sequence:
+        </p>
+
+        <div>
+            <div id="highlighter_543729" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"(x-)(-x)o-"</code
+                                        ><code class="python plain">) </code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Putting multiple characters in square brackets will play them
+            successively in the space of one step. This example plays a triplet
+            of hi-hats during its fourth step:
+        </p>
+
+        <div>
+            <div id="highlighter_430718" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o[---]"</code
+                                        ><code class="python plain">, dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            You can also use curly braces to pick a sound at random, to add a
+            little variety to your sequence:
+        </p>
+
+        <div>
+            <div id="highlighter_323624" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o{-=*}"</code
+                                        ><code class="python plain">) </code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            These can all be used and nested together to create complex
+            patterns:
+        </p>
+
+        <div>
+            <div id="highlighter_237877" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"(x[--])xo{-[--][-x]}"</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- .entry-content -->
+</article>

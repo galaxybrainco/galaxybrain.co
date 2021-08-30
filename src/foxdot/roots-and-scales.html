@@ -1,0 +1,411 @@
+<article id="post-655" class="post-655 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">2.7 Roots and Scales</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <h2>Changing the Root</h2>
+
+        <p>
+            To change the root (or key) of the music in FoxDot, simply change
+            the value of the <code>Root.default</code> variable:
+        </p>
+
+        <div>
+            <div id="highlighter_331880" class="syntaxhighlighter brush plain">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="plain plain"
+                                            >Root.default = 2</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            When you start FoxDot, it is automatically set to 0, which is the
+            key of C. Setting the <code>Root.default</code> value to a number
+            indicates how many semitones to move the root. So to make music in
+            the key of D, you would set the value to 2. This value can be an
+            integer, a floating point value, a
+            <a href="/foxdot/timevar-basics/">TimeVar</a>, or a string. You can
+            use a string to explicitly set the key like so:
+        </p>
+
+        <div>
+            <div id="highlighter_28541" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >Root.default </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python string">"D"</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            You can specify sharps and flats using the “#” and “b” characters
+            respectively:
+        </p>
+
+        <div>
+            <div id="highlighter_669389" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >Root.default </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python string">"D#"</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >Root.default </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python string">"Db"</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            You can set the root of a Player object explicitly using the
+            <code>root</code> keyword. Note: this cannot be a string.
+        </p>
+
+        <div>
+            <div id="highlighter_195782" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Force player into key of D</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >], root</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Will raise an error</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >], root</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python string">"D"</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h2>Updating the Scale</h2>
+
+        <p>
+            When starting FoxDot the scale is automatically set to the major
+            scale. To view all of the available builtin scales, run the
+            following:
+        </p>
+
+        <div>
+            <div id="highlighter_178708" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(Scale.names())</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>This will return a list that looks similar to this:</p>
+
+        <pre class="wp-block-preformatted">
+['aeolian', 'altered', 'bebopDom', 'bebopDorian', 'bebopMaj', 'bebopMelMin', 'blues', 'chinese', 'chromatic', 'custom', 'default', 'diminished', 'dorian', 'dorian2', 'egyptian', 'freq', 'halfDim', 'halfWhole', 'harmonicMajor', 'harmonicMinor', 'hungarianMinor', 'indian', 'justMajor', 'justMinor', 'locrian', 'locrianMajor', 'lydian', 'lydianAug', 'lydianDom', 'lydianMinor', 'major', 'majorPentatonic', 'melMin5th', 'melodicMajor', 'melodicMinor', 'minMaj', 'minor', 'minorPentatonic', 'mixolydian', 'phrygian', 'prometheus', 'romanianMinor', 'susb9', 'wholeHalf', 'wholeTone', 'yu', 'zhi']</pre
+        >
+
+        <p>
+            To view the semitones used by a particular scale, e.g. locrian, you
+            can run <code>print(Scale.locrian)</code>, which will return a
+            Pattern object. Similar to setting the root, you can update scale by
+            changing the <code>Scale.default</code> value. This can be the name
+            of the scale as a string, the scale object e.g.
+            <code>Scale.locrian</code>, or a Pattern of semitone values to use.
+        </p>
+
+        <div>
+            <div id="highlighter_374340" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >Scale.default </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python string"
+                                            >"minor"</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >Scale.default </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain"
+                                            >Scale.minor</code
+                                        >
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >Scale.default </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h4>Tuning</h4>
+
+        <p>
+            You can also set the tuning of the scale by using
+            <code>Scale.default.set()</code> instead and supply a tuning keyword
+            argument. The currently available tuning types are as follows:
+        </p>
+
+        <figure class="wp-block-table">
+            <table class="">
+                <tbody>
+                    <tr>
+                        <td>FoxDot Syntax</td>
+                        <td>Description</td>
+                    </tr>
+                    <tr>
+                        <td><code>Tuning.ET12</code></td>
+                        <td>
+                            <a
+                                href="https://en.wikipedia.org/wiki/Equal_temperament"
+                                >12-tone equal tempered</a
+                            >
+                            (default)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Tuning.just</code></td>
+                        <td>
+                            <a
+                                href="https://en.wikipedia.org/wiki/Just_intonation"
+                                >Just intonation</a
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>Tuning.bohlen_pierce</code></td>
+                        <td>
+                            <a
+                                href="https://en.wikipedia.org/wiki/Bohlen%E2%80%93Pierce_scale"
+                                >Bohlen Pierce Scale</a
+                            >
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </figure>
+
+        <p>
+            As mentioned, to use a different tuning type you need to use
+            <code>.set()</code> with the default scale:
+        </p>
+
+        <div>
+            <div id="highlighter_946258" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >Scale.default.</code
+                                        ><code class="python functions"
+                                            >set</code
+                                        ><code class="python plain">(</code
+                                        ><code class="python string"
+                                            >"major"</code
+                                        ><code class="python plain"
+                                            >, tuning</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >Tuning.just)</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            You can create your own tuning system by supplying a list of numbers
+            that divide the scale up such that the last number is equal to the
+            first number one octave up e.g. the equal tempered 12 tone tuning
+            system would use the numbers [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+            12].
+        </p>
+
+        <div>
+            <div id="highlighter_354338" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >Scale.default.</code
+                                        ><code class="python functions"
+                                            >set</code
+                                        ><code class="python plain">([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain"
+                                            >], tuning</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2.1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2.9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4.1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4.9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6.1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6.9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8.1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8.9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10.1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10.9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">12</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- .entry-content -->
+</article>

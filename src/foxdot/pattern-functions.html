@@ -1,0 +1,952 @@
+<article id="post-576" class="post-576 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">3.2 Pattern Functions</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <p>
+            There are several functions that generate a Pattern of values for us
+            for achieving useful things in FoxDot, such as rhythms and melodies.
+            This page is a list of Pattern functions accompanied by descriptions
+            and examples.
+        </p>
+
+        <p>
+            Used as input arguments for Foxdot players, these can be treated as
+            patterns themselves and their methods can be applied directly e.g.
+            <code>PDur(3, 8).reverse()</code>. You can also substitute any input
+            argument with a <a href="/foxdot/pattern-basics/">Pattern </a>or
+            <a href="/foxdot/timevar-basics/">TimeVar </a>to create an extended
+            pattern or <code>Pvar</code>. Let’s look at some examples:
+        </p>
+
+        <div>
+            <div id="highlighter_825111" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python comments"
+                                            ># Basic pattern function</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PDur(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python comments"
+                                            ># Use a list/Pattern to join
+                                            together two patterns using the same
+                                            function</code
+                                        >
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PDur([</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number9 index8 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python comments"
+                                            ># Use a TimeVar to create a
+                                            Pvar</code
+                                        >
+                                    </div>
+                                    <div class="line number10 index9 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PDur(var([</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">]), </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number11 index10 alt2">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain"
+                                            >]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python comments"
+                                            ># Equal to PDur(3,8)</code
+                                        >
+                                    </div>
+                                    <div class="line number12 index11 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.25</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.25</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain"
+                                            >]&nbsp;&nbsp; </code
+                                        ><code class="python comments"
+                                            ># Equal to PDur(5,8) after 4
+                                            beats</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr />
+
+        <h3><code>PStep(n, value, default=0)</code></h3>
+
+        <p>
+            Creates a Pattern of length <code>n</code> with the last element set
+            to <code>value</code>. All other values are set to
+            <code>default</code>.
+        </p>
+
+        <div>
+            <div id="highlighter_572955" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PStep(</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PStep(</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"o"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"x"</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python string">"x"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"x"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"x"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"o"</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PSum(n, total, lim=0.125)</code></h3>
+
+        <p>
+            Returns a Pattern of length <code>n</code> whose sum is equal to
+            <code>total</code> and each value is roughly equal. All values are
+            divisible by <code>lim</code>, which is also the smallest possible
+            value for each element.
+        </p>
+
+        <div>
+            <div id="highlighter_268073" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PSum(</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PSum(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PRange(start, stop=None, step=None)</code></h3>
+
+        <p>
+            Returns a Pattern filled with the series from <code>start</code> to
+            <code>stop</code> (non inclusive) with increments of
+            <code>step</code> (defaults to 1). If <code>stop</code> is omitted
+            then the series starts at 0 and ends at <code>start</code>.
+        </p>
+
+        <div>
+            <div id="highlighter_555526" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PRange(</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PRange(</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PRange(</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">14</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">12</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PTri(start, stop=None, step=None)</code></h3>
+
+        <p>
+            Returns a Pattern filled with the series from <code>start</code> to
+            <code>stop</code> and back again (non inclusive) with increments of
+            <code>step</code> (defaults to 1). If <code>stop</code> is omitted
+            then the series starts at 0 and peaks at <code>start</code>.
+        </p>
+
+        <div>
+            <div id="highlighter_154450" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PTri(</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PTri(</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PTri(</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">14</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">12</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PSine(n=16)</code></h3>
+
+        <p>
+            Returns a Pattern with <code>n</code> values taken from a basic sine
+            wave function equal distances apart.
+        </p>
+
+        <div>
+            <div id="highlighter_746944" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PSine(</code
+                                        ><code class="python value">16</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >0.3826834323650898</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >0.7071067811865476</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >0.9238795325112867</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >0.9238795325112867</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >0.7071067811865476</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >0.3826834323650899</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >1.2246467991473532e</code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">16</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value"
+                                            >0.38268343236508967</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value"
+                                            >0.7071067811865475</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value"
+                                            >0.9238795325112865</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">1.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value"
+                                            >0.9238795325112866</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value"
+                                            >0.7071067811865477</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value"
+                                            >0.3826834323650904</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PEuclid(n, k)</code></h3>
+
+        <p>
+            Uses the
+            <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm"
+                >Euclidean Algorithm</a
+            >
+            to create a Pattern of length <code>k</code> with
+            <code>n</code> number of pulses spread as equally as possible
+            throughout the set. Pulses are represented as a 1.
+        </p>
+
+        <div>
+            <div id="highlighter_533625" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PEuclid(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PEuclid2(n, k, lo, hi)</code></h3>
+
+        <p>
+            Same function as <code>PEuclid</code> but replaces the 1’s with
+            <code>hi</code> and 0’s with <code>lo</code>.
+        </p>
+
+        <div>
+            <div id="highlighter_455851" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PEuclid2(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"x"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"o"</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python string">"o"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"x"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"x"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"o"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"x"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"x"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"o"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">"x"</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PDur(n, k, start=0, dur=0.25)</code></h3>
+
+        <p>
+            Returns the output of <code>PEuclid</code> as a series of durations
+            where each element is a step of duration <code>dur</code>. The
+            <code>start</code> keyword specifies the starting index of the
+            Pattern.
+        </p>
+
+        <div>
+            <div id="highlighter_84611" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PDur(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PDur(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PDur(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.5</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PBern(size=16, ratio=0.5)</code></h3>
+
+        <p>
+            Returns a Pattern of length <code>size</code> filled with a random
+            selection of 1s and 0s based on the <code>ratio</code> value, known
+            as a
+            <a href="https://en.wikipedia.org/wiki/Bernoulli_process"
+                >Bernoulli Sequence</a
+            >.
+        </p>
+
+        <div>
+            <div id="highlighter_176076" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PBern(</code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PBern(</code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PBeat(string, start=0, dur=0.5)</code></h3>
+
+        <p>
+            Returns a Pattern of durations based on an input string where
+            non-whitespace denote a pulse.
+        </p>
+
+        <div>
+            <div id="highlighter_893827" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PBeat(</code
+                                        ><code class="python string"
+                                            >"x xxx x"</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PBeat(</code
+                                        ><code class="python string"
+                                            >"x xxx x"</code
+                                        ><code class="python plain"
+                                            >, start</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0.25</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.25</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.25</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PSq(a=1, b=2, c=3)</code></h3>
+
+        <p>
+            Returns a Pattern of square numbers in the range <code>a</code> to
+            <code>(a + c) - 1</code>.
+        </p>
+
+        <div>
+            <div id="highlighter_697741" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PSq(</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PSq(</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">16</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">25</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">36</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- .entry-content -->
+</article>

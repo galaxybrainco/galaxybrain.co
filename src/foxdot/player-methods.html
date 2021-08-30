@@ -1,0 +1,458 @@
+<article id="post-524" class="post-524 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">Player Methods</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <p>
+            As well as manipulating your players by changing their attributes,
+            you can also use methods to change their behaviours. Some methods
+            just apply a “preset” to specific attributes in order to save typing
+            time. For example, the method <code>spread</code> is equivalent to
+            setting a player’s <code>pan</code> to both left and right and
+            offsetting the the pitch, using the <code>pshift</code> attribute,
+            off by 0.125 semitones in each channel:
+        </p>
+        <pre>
+# Spreading a sound across stereo channels out of phase
+d1 &gt;&gt; play("x-o-", pan=(-1, 1), pshift=(0, 0.125))
+
+# This can be done using the "spread" method
+d1 &gt;&gt; play("x-o-").spread()
+
+# Instructions are interpreted left-to-right so spread overrides the "pan=[-1, 0, 1]"
+d1 &gt;&gt; play("x-o-", pan=[-1, 0, 1]).spread()
+
+# Using "spread" *before* the &gt;&gt; will set panning to [-1, 0, 1] but pshift will still be (0, 0.125)
+d1.spread() &gt;&gt; play("x-o-", pan=[-1, 0, 1])
+</pre
+        >
+        <p>
+            Below is a list of methods that can be used with accompanying
+            example code. This list is incomplete so please bear with me while I
+            update this list with more information.
+        </p>
+        <h2>Class methods</h2>
+        <h3><code>get_attributes()</code></h3>
+        <p>
+            Returns a list of the possible player attributes that can be
+            changed.
+        </p>
+        <pre>
+&gt;&gt;&gt; print(Player.get_attributes())
+('degree', 'oct', 'freq', 'dur', 'delay', 'blur', 'amplify', 'scale', 'bpm', 'sample', 'sus', 'fmod', 'pan', 'rate', 'amp', 'vib', 'vibdepth', 'slide', 'sus', 'slidedelay', 'slidefrom', 'bend', 'benddelay', 'coarse', 'striate', 'buf', 'rate', 'pshift', 'hpf', 'hpr', 'lpf', 'lpr', 'chop', 'echo', 'decay', 'spin', 'cut', 'room', 'mix', 'formant', 'shape')
+</pre
+        >
+        <h3><code>help()</code></h3>
+        <p>Prints the Player class’s docstring to the console.</p>
+        <pre>
+&gt;&gt;&gt; Player.help()
+"FoxDot generates music by creating instances of `Player` and giving them instructions to follow..."
+</pre
+        >
+        <h2>“Magic” methods</h2>
+        <h3><code>__init__(name=None)</code></h3>
+        <p>
+            Initialises a new player object that you can assign instructions.
+            You can give it a name so that it is easier to identify it when
+            printing the contents of the scheduling clock, for example.
+        </p>
+        <pre>
+&gt;&gt;&gt; # Creates a new player (name can be different to the variable name)
+&gt;&gt;&gt; foo = Player("bar")
+&gt;&gt;&gt; foo &gt;&gt; pluck()
+&gt;&gt;&gt; # Print contents of clock
+&gt;&gt;&gt; print(Clock.playing)
+['']
+</pre
+        >
+        <h3><code>__repr__()</code></h3>
+        <p>
+            Returns the string representation of the player (called when using
+            <code>print</code> to display information in the console). If it has
+            been given a name it will return the name followed by the synthdef
+            being used. If not it will return information only about the
+            synthdef.
+        </p>
+        <pre>
+&gt;&gt;&gt; # With a name
+&gt;&gt;&gt; p1 = Player("p1")
+&gt;&gt;&gt; p1 &gt;&gt; pads()
+&gt;&gt;&gt; print(p1)
+""
+&gt;&gt;&gt; # Without a name
+&gt;&gt;&gt; p1 = Player()
+&gt;&gt;&gt; p1 &gt;&gt; pads()
+&gt;&gt;&gt; print(p1)
+"A 'pluck' Player Object
+</pre
+        >
+        <h3><code>__add__(value)</code></h3>
+        <p>
+            This adds <code>value</code> to the <code>degree</code> of the
+            Player. If it is using the <code>play</code> synthdef, the value is
+            added to the <code>sample</code> attribute instead.
+        </p>
+        <pre>
+# The two lines are equivalent
+p1 &gt;&gt; pads(P[0, 1, 2, 3] + (0, 4))
+p1 &gt;&gt; pads(P[0, 1, 2, 3]) + (0, 4)
+
+# Can be a Pattern, PGroup, var, or single number
+p1 &gt;&gt; pads(P[0, 1, 2, 3]) + [0, 0, 4]
+p1 &gt;&gt; pads(P[0, 1, 2, 3]) + var([0, -2], 8)
+
+# Using 'play' will alter the sample values such that these lines are equivalent
+p2 &gt;&gt; play("x-o-", sample=P[2, 3] + [0, 0, 1])
+p2 &gt;&gt; play("x-o-", sample=[2, 3]) + [0, 0, 1]
+</pre
+        >
+        <h3><code>__getattr__(attr)</code></h3>
+        <p>
+            The <code>__getattr__</code> is called when you retrieve an
+            attribute, such as amplitude, from a Player<br />
+            object using <code>p1.amp</code>. This returns a PlayerKey object,
+            which acts in a similar way to a TimeVar.
+        </p>
+        <h3><code>__setattr__(attr, value)</code></h3>
+        <h3><code>__invert__()</code></h3>
+        <p>Shorthand for the <code>reset</code> method.</p>
+        <pre>
+# Resets all attributes then updates the player with new 'rate'
+p1.reset() &gt;&gt; play("x-o-", rate=2)
+
+# Equivalent to the line above
+~p1 &gt;&gt; play("x-o-", rate=2)
+</pre
+        >
+        <h2>Instance methods</h2>
+        <h3><code>stop()</code></h3>
+        <p>
+            Removes the Player from the scheduling clock such that you cannot
+            hear it any more.
+        </p>
+        <pre>
+# If a player is running, use .stop() to stop it!
+p1 &gt;&gt; pluck()
+
+p1.stop()
+
+# You can add the method to the end of the line too
+p1 &gt;&gt; pluck().stop()
+</pre
+        >
+        <h3><code>reset()</code></h3>
+        <p>
+            Resets all of the attribute values to their original values. This is
+            zero for all values except <code>oct</code>, <code>rate</code>, and
+            <code>amp</code>, which are 5, 1, and 1 respectively.
+        </p>
+        <pre>
+# Start a player
+p1 &gt;&gt; play("x-o-", dur=1, rate=2, hpf=4000)
+
+# Reset the attributes to defaults
+p1.reset()
+
+# Useful for when you don't want to set values to 0 manually e.g.
+p2 &gt;&gt; pluck([0, 2, 4, 7], dur=1/4, hpf=500, pan=[-1,1])
+
+# Sets the dur to 1, hpf to 0 and pan to 0
+p2.reset() &gt;&gt; pluck([0, 2, 4, 7])
+</pre
+        >
+        <h3><code>solo(switch=1)</code></h3>
+        <p>
+            Mutes every other active Player such that this Player is the only
+            one heard. To un-mute an individual Player, just re-evaluate a line
+            of code. To un-mute all Players, call this method with
+            <code>switch</code> set to 0 or <code>False</code>.
+        </p>
+        <pre>
+# Start a few players
+d1 &gt;&gt; play("x-o-")
+p1 &gt;&gt; pluck([0,2], dur=PDur(3,8))
+
+# Solo p1
+p1.solo()
+
+# Re-add other Players
+p1.solo(0)
+</pre
+        >
+        <h3><code>only()</code></h3>
+        <p>
+            Stops all other active Players. Unlike <code>solo</code>, this
+            effect cannot be undone using <code>only(0)</code> as the stopping
+            is permanent. You need to manually re-introduce Players.
+        </p>
+        <pre>
+# Start a few players
+d1 &gt;&gt; play("x-o-")
+p1 &gt;&gt; pluck([0,2], dur=PDur(3,8))
+p2 &gt;&gt; pads([0,3], dur=8, oct=4)
+
+# Stop p1 and p2 using d1.only()
+d1.only()
+</pre
+        >
+        <h3><code>now(attr="degree")</code></h3>
+        <p>
+            Returns the current value (i.e. the last value played) for a given
+            attribute. By default this is the degree (pitch or sample character)
+            but you can specify the attribute name as a string.
+        </p>
+        <pre>
+&gt;&gt;&gt; # Start a player
+&gt;&gt;&gt; p1 &gt;&gt; pluck([0, 2, 4], dur=[1, 2, 5])
+
+&gt;&gt;&gt; # Print the pitch and duration
+&gt;&gt;&gt; print(p1.now(), p1.now("dur"))
+0, 1
+&gt;&gt;&gt; print(p1.now(), p1.now("dur"))
+2, 2
+&gt;&gt;&gt; print(p1.now(), p1.now("dur"))
+4, 5
+</pre
+        >
+        <h3><code>every(n, method_name, *args, **kwargs)</code></h3>
+        <p>
+            Use to call a method every <code>n</code> number of beats. Specify
+            the method name as a string and then the arguments and keyword
+            arguments to supply the method. See
+            <a href="/foxdot/algorithmic-manipulation/"
+                >Algorithmic Manipulation</a
+            >
+            for more in-depth information on <code>every</code>.
+        </p>
+        <pre>
+# Start a player
+p1 &gt;&gt; pluck([0,1,2,3,4,5,6,7,8])
+
+# Reverse the order every 8 beats
+p1.every(8, "reverse")
+
+# Multiple method calls can be chained together
+p1 &gt;&gt; pluck([0,2,4,7]).every(4, "reverse").every(8, "rotate")
+</pre
+        >
+        <h3><code>after(n, method_name, *args, **kwargs)</code></h3>
+        <p>
+            Similar to <code>every</code> but only calls the method once after
+            <code>n</code> number of beats. This might be useful for only
+            looping a sequence for a certain amount of time, for example:
+        </p>
+        <pre>
+# Stop a drum loop after 8 beats
+d1 &gt;&gt; play("x-o-").after(8, "stop")
+</pre
+        >
+        <h3><code>stutter(n, *args, **kwargs)</code></h3>
+        <p>
+            Repeat the last musical event <code>n</code> times. You can specify
+            keyword arguments as you would normally update a Player to control
+            the stutter. The <code>dur</code> keyword changes the duration over
+            which to spread the stuttered events (defaults to the Player’s
+            current duration value).
+        </p>
+        <pre>
+# Start a player
+d1 &gt;&gt; play("x-o-")
+
+# Stutter it once
+d1.stutter()
+
+# Stutter it 4 times (3 extra events)
+d1.stutter(4)
+
+# Stutter it 8 times over 2 beats and alternate panning
+d1.stutter(8, dur=2, pan=[-1,1])
+
+# Very useful when combined with "every"
+d1.every(8, "stutter", 4, dur=3)
+</pre
+        >
+        <h3><code>jump(ahead=1, **kwargs)</code></h3>
+        <p>
+            Plays the event that’s a number of steps ahead of the player’s
+            current position as specified by the <code>ahead</code> argument.
+            This is best used in conjunction with the <code>every</code> method:
+        </p>
+        <pre>
+# Plays the snare drum half a beat early after 6.5 beats
+d1 &gt;&gt; play("x-o-").every(6.5, "jump", cycle=8)
+</pre
+        >
+        <h3><code>spread(pshift=0.125)</code></h3>
+        <p>
+            Sets the panning to both left and right and offsets the pitch by
+            0.125 semitones by default to get thicker stereo sound.
+        </p>
+        <pre>
+# Without spread
+p1 &gt;&gt; pluck([0, 4], oct=4, dur=PDur(3,8), sus=2)
+
+# With spread
+p1 &gt;&gt; pluck([0, 4], oct=4, dur=PDur(3,8), sus=2).spread()
+</pre
+        >
+        <h3><code>slider(start=0, switch=1)</code></h3>
+        <p>
+            Creates an alternating slide effect with the player. Set
+            <code>start</code> to 1 to swap the up-down slide order. Use
+            <code>switch=0</code> to turn the effect off or the
+            <code>reset</code> method.
+        </p>
+        <pre>
+# Basic player 
+p1 &gt;&gt; saw([7, 0, 3, 1, 7, 4, 5, 2], dur=1/4, oct=4)
+
+# With slider added
+p1 &gt;&gt; saw([7, 0, 3, 1, 7, 4, 5, 2], dur=1/4, oct=4).slider()
+</pre
+        >
+        <h3><code>penta(switch=1)</code></h3>
+        <p>
+            Sets the scale to the
+            <a href="https://en.wikipedia.org/wiki/Pentatonic_scale"
+                >pentatonic</a
+            >
+            mode of the default scale. Use <code>switch=0</code> to revert to
+            the default scale.
+        </p>
+        <pre>
+# Default scale
+p1 &gt;&gt; pluck([0, 1, 2, 3, 4, 5, 6, 7])
+
+# Pentatonic
+p1 &gt;&gt; pluck([0, 1, 2, 3, 4, 5, 6, 7]).penta()
+</pre
+        >
+        <h3><code>degrade(amount=0.5)</code></h3>
+        <p>
+            Sets the amplitude to be chosen from 1 and 0 at random. The
+            <code>amount</code> argument is the likelihood of the amplitude
+            being 0 as a fraction i.e. a degrade of 0.5 (default) means each
+            event is 50% likely to be a 0 and at 0.1 it is 10% likely to be a 0.
+        </p>
+        <pre>
+# Start a player
+p1 &gt;&gt; pluck()
+
+# Start to decrease the number of events
+p1.degrade()
+
+# Can be called repeatedly to degrade by 25% every 8 beats
+p1.every(8, "degrade", 0.25)
+</pre
+        >
+        <h3><code>offbeat(n=1)</code></h3>
+        <p>
+            Sets the <code>dur</code> to <code>n</code> and
+            <code>delay</code> to <code>n / 2</code> so that each note is played
+            on the offbeat.
+        </p>
+        <pre>
+# Use percussion to hear the difference
+d1 &gt;&gt; play("x-o-")
+p1 &gt;&gt; pluck()
+
+# Set the duration to 1 and offbeat
+p1.offbeat()
+
+# Set the duration to 2 and off every 2 beats
+p1.offbeat(2)
+</pre
+        >
+        <h3><code>reverse()</code></h3>
+        <p>
+            Reverses the order of all the attributes at the current time. This
+            method does <b>not</b> reverse the lists of values but reverses the
+            order in which they are used.
+        </p>
+        <pre>
+# Player an octave
+p1 &gt;&gt; pluck([0, 1, 2, 3, 4, 5, 6, 7])
+
+# Call reverse and the notes start descending
+p1.reverse()
+
+# Call using "every" for organic movement up and down
+p1.every([6,3], "reverse")
+</pre
+        >
+        <h3><code>rotate(n=1)</code></h3>
+        <p>
+            Moves all of the pitch / sample char elements over by
+            <code>n</code> steps such that the new list of data starts is
+            equivalent but starts at the <code>n</code>th item in the original
+            list.
+        </p>
+        <pre>
+# Start a player
+p1 &gt;&gt; pluck([0,1,2,3])
+
+# Rotating [0,1,2,3] changes it to [1,2,3,0]
+p1.rotate()
+</pre
+        >
+        <h3><code>shuffle()</code></h3>
+        <p>Randomises the order of the pitch / sample character attribute.</p>
+        <pre>
+# Start a player
+p1 &gt;&gt; pluck([0,1,2,3])
+
+# Changes the order once
+p1.shuffle()
+
+# Changes the order every 8 beats
+p1.every(8, "shuffle")
+</pre
+        >
+        <h3><code>follow(player)</code></h3>
+        <p>
+            Follows the pitch of <code>player</code>. It is equivalent to
+            setting the pitch of one player, e.g. <code>p1</code>, to another’s
+            pitch using <code>p2.pitch</code>.
+        </p>
+        <pre>
+# Start a player
+p1 &gt;&gt; pluck([0, 1, 2, 3], dur=2)
+
+# Follow the pitch in p2
+p2 &gt;&gt; blip().follow(p1)
+
+# Add values to change the pitch
+p2 &gt;&gt; blip().follow(p1) + [0, 2]
+</pre
+        >
+        <h3><code>accompany(player)</code></h3>
+        <p>
+            Similar to <code>follow</code>, this method forces the player to
+            play notes that are derived from the pitch of another Player. The
+            pitch will be the closest neighbour to the last pitch used that is
+            the new pitch of the source player plus 0, 2, or 4.
+        </p>
+        <pre>
+# Start a player
+p1 &gt;&gt; pluck([0, 1, 2, 3], dur=2)
+
+# Play accompanying pitches
+p2 &gt;&gt; blip().accompany(p1)
+
+# Add values to change the pitch
+p2 &gt;&gt; blip().accompany(p1) + [0, 2]
+</pre
+        >
+        <h3><code>attrmap(key1, key2, mapping)</code></h3>
+        <p>Undocumented</p>
+        <h3><code>smap(mapping)</code></h3>
+        <p>Undocumented</p>
+        <h3><code>map(player, mapping, attr="degree")</code></h3>
+        <p>Undocumented</p>
+        <h3><code>bang(**kwargs)</code></h3>
+        <p>Undocumented</p>
+    </div>
+    <!-- .entry-content -->
+</article>

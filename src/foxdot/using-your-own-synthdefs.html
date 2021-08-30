@@ -1,0 +1,292 @@
+<article id="post-551" class="post-551 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">6.3 Using your own SynthDefs</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <p>
+            While FoxDot does come with its own range of SynthDefs for you to
+            control, you may want to write your own or use one you have already
+            created. This page takes you through how you go about writing a
+            SynthDef to be used with FoxDot. This page requires a basic
+            understanding of SuperCollider SynthDefs; if you would like to find
+            out more, you can visit the
+            <a href="http://doc.sccode.org/Classes/SynthDef.html"
+                >SuperCollider documentation</a
+            >
+            on the topic.
+        </p>
+
+        <p>
+            Let’s start with a very basic SynthDef written in SuperCollider made
+            from a sine wave and a basic percussive envelope. If we’re
+            controlling amplitude and panning as well, it might look something
+            like this:
+        </p>
+
+        <pre class="wp-block-preformatted lang:java">
+SynthDef.new(\sine,
+    {|amp=1, sus=1, pan=0, freq=0|
+        var osc, env;
+        osc=SinOsc.ar(freq, mul: amp);
+        env=EnvGen.ar(Env.perc(attackTime: 0.01, releaseTime: sus), doneAction: 2);
+        osc=(osc * env);
+        osc = Pan2.ar(osc, pan);
+        Out.ar(0, osc)}).add;</pre
+        >
+
+        <p>
+            To trigger synth messages in SuperCollider from FoxDot, you just
+            need to give FoxDot a reference to the SynthDef. You can do this by
+            running the following code in FoxDot:
+        </p>
+
+        <div>
+            <div
+                id="highlighter_266521"
+                class="syntaxhighlighter nogutter python"
+            >
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain">sine </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain"
+                                            >SynthDef(</code
+                                        ><code class="python string"
+                                            >"sine"</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            The <code>sine</code> on the left is what FoxDot will refer to the
+            synth as, and the <code>"sine"</code> in brackets on the right is
+            the name of the SynthDef in SuperCollider. They don’t have to have
+            the same name but it makes sense to keep things consistent. Once you
+            have a <code>sine</code> SynthDef in FoxDot, you can use it with a
+            player object just like any other. e.g.
+        </p>
+
+        <div>
+            <div
+                id="highlighter_122389"
+                class="syntaxhighlighter nogutter python"
+            >
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; sine([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            However, if you try and use effects in FoxDot, you’ll find it
+            doesn’t work:
+        </p>
+
+        <div>
+            <div
+                id="highlighter_555161"
+                class="syntaxhighlighter nogutter python"
+            >
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; sine([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain"
+                                            >, shape</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, chop</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            To be able to “chain” effects you need to make a few adjustments to
+            the SuperCollider SynthDef. First of all you need to be able to
+            supply the SynthDef with a <code>bus</code> argument, which will
+            store the output of the synth as effects are added. Then you need to
+            use <code>In.kr</code> for the <code>freq</code> value (you are
+            actually reading it from a bus, not supplying it directly) and then
+            <code>ReplaceOut.ar</code> instead of <code>Out.ar</code> on the
+            last line so that we write the audio signal out to the effects bus
+            instead of your computer’s audio device. Your new SynthDef should
+            look something like this:
+        </p>
+
+        <pre class="wp-block-preformatted lang:java">
+SynthDef.new(\sine,
+     {|amp=1, sus=1, pan=0, bus=0, freq=0|
+         var osc, env;
+         freq = In.kr(bus, 1);
+         osc=SinOsc.ar(freq, mul: amp);
+         env=EnvGen.ar(Env.perc(attackTime: 0.01, releaseTime: sus), doneAction: 0);
+         osc=(osc * env);
+         osc = Pan2.ar(osc, pan);
+         ReplaceOut.ar(bus, osc)}).add;</pre
+        >
+
+        <h3>Saving your SynthDef</h3>
+
+        <p>
+            If you want to save your SynthDef (or have already saved it) and
+            wish to load it into memory from FoxDot you can use the
+            <code>FileSynthDef</code> class. You will need to name the file the
+            same name as the SynthDef itself. So in our example above, we would
+            need to save it as <code>sine.scd</code>. The file needs to be saved
+            in <code>FoxDot/osc/scsyndef</code>, in which you’ll find the other
+            <code>.scd</code> files used by FoxDot. You can find this by going
+            to your Python installation directory then going to
+            <code>/site-packages/FoxDot/osc/scsyndef</code>.
+        </p>
+
+        <p>
+            To load the SynthDef during a FoxDot session, create the SynthDef
+            and use the <code>add</code> method to load it into SuperCollider
+            like so:
+        </p>
+
+        <div>
+            <div id="highlighter_765454" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain">sine </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain"
+                                            >FileSynthDef(</code
+                                        ><code class="python string"
+                                            >"sine"</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >sine.add()</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p><b>Important</b></p>
+
+        <p>
+            Make sure that any <code>doneAction</code> arguments are set to 0 so
+            that the node isn’t immediately released. Effects such as reverb or
+            echo require the synth not to be released until later. Using a
+            <code>doneAction</code> value of 4 will not free up all of the nodes
+            and will cause SuperCollider to run out of memory – so be careful!
+            Now try running the FoxDot code from above and you should hear the
+            sound with effects applied!
+        </p>
+
+        <div>
+            <div
+                id="highlighter_694624"
+                class="syntaxhighlighter nogutter python"
+            >
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; sine([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain"
+                                            >, shape</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, chop</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- .entry-content -->
+</article>

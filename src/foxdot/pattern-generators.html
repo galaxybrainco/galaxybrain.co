@@ -1,0 +1,1583 @@
+<article id="post-616" class="post-616 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">3.3 Pattern Generators</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <h2>Introduction</h2>
+
+        <p>
+            We know that
+            <a
+                href="/foxdot/pattern-basics/"
+                >Patterns</a
+            >
+            are of fixed length and can be generated based on a function.
+            However, sometimes it is useful to have Patterns of
+            <em>infinite</em> length, such as when generating random numbers.
+            This is where Pattern Generators come in. Similar to Python
+            <a
+                href="https://wiki.python.org/moin/Generators"
+                >generators</a
+            >
+            where not all the values are kept in memory at once, except when
+            Python generators usually have an end – FoxDot Pattern Generators do
+            not! Let’s look at the <code>PRand</code> Pattern Generator to begin
+            with, then you’ll find a list of all the available Pattern
+            Generators with some examples code below.
+        </p>
+
+        <p>
+            The <code>PRand</code> Generator gives us an infinite supply of
+            random numbers between a given low and high value or from a set of
+            values given in a list. We can’t just print the object like we do
+            with Patterns, because we can’t print an infinite list of values
+            that hasn’t even been calculated yet:
+        </p>
+
+        <div>
+            <div id="highlighter_123431" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; my_gen </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">PRand(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(my_gen)</code
+                                        >
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain">PRand(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            To see what values are in <code>my_gen</code> we need to access it
+            using indexing or slicing.
+        </p>
+
+        <div>
+            <div id="highlighter_243703" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; my_gen[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python value">4</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; my_gen[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python value">6</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; my_gen[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Indexing the <code>PRand</code> gives us single values and slicing
+            returns a Pattern of values. Notice how the first two values are 4
+            and 6? A Generator Pattern will (almost) always return the same
+            value for a given index. You can apply any
+            <a
+                href="/foxdot/pattern-methods/"
+                >Pattern Method</a
+            >
+            to the Pattern object you get back from slicing.
+        </p>
+
+        <p>
+            You can also perform basic mathematical operations on Pattern
+            Generators:
+        </p>
+
+        <div>
+            <div id="highlighter_891495" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; my_gen2 </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">my_gen </code
+                                        ><code class="python keyword">*</code>
+                                        <code class="python value">2</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(my_gen2)</code
+                                        >
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >PRand(Mul </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; my_gen2[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">12</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">16</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">16</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">16</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">16</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Printing the new <code>PRand</code> tells us a little bit about it,
+            but not much – just that it’s an existing <code>PRand</code> object
+            and has been multiplied by 2. You can also use your own custom
+            functions and apply them to Pattern Generators in the same way you
+            can apply them to Patterns; through the
+            <code>transform</code> method. Let’s create a function that returns
+            5 when an input is odd and 3 when the input is even:
+        </p>
+
+        <div>
+            <div id="highlighter_8166" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python keyword">def</code>
+                                        <code class="python plain"
+                                            >odd_test(num):</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >...&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python keyword"
+                                            >return</code
+                                        >
+                                        <code class="python value">5</code>
+                                        <code class="python keyword">if</code>
+                                        <code class="python plain">num </code
+                                        ><code class="python keyword">%</code>
+                                        <code class="python value">2</code>
+                                        <code class="python keyword">=</code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python value">1</code>
+                                        <code class="python keyword">else</code>
+                                        <code class="python value">3</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; my_odd_gen </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain"
+                                            >odd_test(PRand(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">))</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(my_odd_gen)</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python value">3</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            The <code>num % 2</code> returns a new <code>PRand</code> and not a
+            number, so when it is asked “is this equal to 1?” it will always
+            return False, and consequently, 3. To actually apply the function to
+            the values in our Pattern Generator, we need to use the transform
+            method and supply it with the function.
+        </p>
+
+        <div>
+            <div id="highlighter_164703" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; my_odd_gen </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">PRand(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain"
+                                            >).transform(odd_test)</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(my_odd_gen)</code
+                                        >
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain">PRand(</code
+                                        ><code class="python keyword"
+                                            >lambda</code
+                                        >
+                                        <code class="python color1">None</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(my_odd_gen[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Printing the new Generator Pattern shows us we have a new
+            <code>PRand</code> that has been transformed (the “lambda”) with no
+            input value. Slicing it returns a Pattern of 3s and 5s just as we
+            expect.
+        </p>
+
+        <p>
+            What happens if we’re not storing our Pattern Generators in a
+            variable and we print them though?
+        </p>
+
+        <div>
+            <div id="highlighter_117280" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(PRand(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(PRand(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            We get a different list of values back. That’s because we are
+            initialising a new <code>PRand</code> each time we run the code.
+            This get’s a bit annoying, especially when using FoxDot as you are
+            often supplying Pattern objects with Pattern Generators in this way
+            and not storing them in a variable first. If you want to make sure
+            you get the same values from your Pattern Generator, you can specify
+            the
+            <a
+                href="https://en.wikipedia.org/wiki/Random_seed"
+                >seed</a
+            >, which – when set to the same number – forces a computer’s random
+            number generator to generate the same set of numbers.
+        </p>
+
+        <div>
+            <div id="highlighter_29475" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(PRand(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, seed</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(PRand(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, seed</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h2>Types of Pattern Generators</h2>
+
+        <h3>
+            <code>PRand(lo, hi, seed=None)</code> / <code>PRand([values])</code>
+        </h3>
+
+        <p>
+            Returns a series of random integers between <code>lo</code> and
+            <code>hi</code> inclusive. If <code>hi</code> is omitted then the
+            range is between 0 and <code>lo</code>. A list of values can be
+            supplied in place of the range and <code>PRand</code> will return a
+            series of values randomly picked from the list.
+        </p>
+
+        <div>
+            <div id="highlighter_361167" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PRand(</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PRand(</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PRand([</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PxRand(lo, hi)</code> / <code>PxRand([values])</code></h3>
+
+        <p>Identical to <code>PRand</code> but no elements are repeated.</p>
+
+        <div>
+            <div id="highlighter_424083" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PxRand(</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PxRand(</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PxRand([</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PwRand([values], [weights])</code></h3>
+
+        <p>
+            Uses a list of weights to denote how frequently items with the same
+            index from the list of values are picked. A weight of 2 means it is
+            twice as likely to be picked as an item with a weight of 1.
+        </p>
+
+        <div>
+            <div id="highlighter_604025" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PwRand([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">])[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PwRand([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PWhite(lo, hi)</code></h3>
+
+        <p>
+            Returns random floating point numbers between <code>lo</code> and
+            <code>hi</code>.
+        </p>
+
+        <div>
+            <div id="highlighter_249760" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PWhite(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value"
+                                            >4.19058560392058</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >2.776022501076935</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >1.0643923909231003</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >1.638195673989835</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >0.8591848958936567</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >2.461472231869311</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >3.3546237751457335</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >1.1854918335554943</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >1.8310777165408907</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value"
+                                            >1.1767145868610336</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PChain(mapping_dictionary)</code></h3>
+
+        <p>
+            Based on a simple
+            <a
+                href="https://en.wikipedia.org/wiki/Markov_chain"
+                >Markov Chain</a
+            >
+            of using equal probabilities. Takes a dictionary of items; states
+            and possible future states. Each future state has an equal
+            probability of being chosen. If a possible future state is not
+            valid, a <code>KeyError</code> will be raised.
+        </p>
+
+        <div>
+            <div id="highlighter_228571" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; markov_chain </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">{</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >...&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">: [</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">],</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >...&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">: [</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">],</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain"
+                                            >...&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">: [</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">],</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >...&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">: [</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">],</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python plain">... }</code>
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt;
+                                            PChain(markov_chain)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PWalk(max = 7, step = 1, start = 0)</code></h3>
+
+        <p>
+            Returns a series of integers where each element is
+            <code>step</code> size away from each other and value are in the
+            range +/- the <code>max</code>. The first element can be chosen
+            using <code>start</code>.
+        </p>
+
+        <div>
+            <div id="highlighter_148483" class="syntaxhighlighter brush plain">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="plain plain"
+                                            >&gt;&gt;&gt; PWalk()[:10]</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="plain plain"
+                                            >P[0, 1, 2, 1, 2, 3, 2, 3, 4,
+                                            5]</code
+                                        >
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="plain plain"
+                                            >&gt;&gt;&gt; PWalk(20, 5,
+                                            5)[:10]</code
+                                        >
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="plain plain"
+                                            >P[5, 10, 15, 20, 15, 20, 15, 20,
+                                            15, 20]</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PDelta(deltas, start = 0)</code></h3>
+
+        <p>
+            Takes a list of deltas (small increments/decrements) and returns the
+            series of numbers generated by adding these values together in
+            sequence. Using a single positive number will create an infinitely
+            increasing series. Set the starting value using <code>start</code>.
+        </p>
+
+        <div>
+            <div id="highlighter_247149" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PDelta([</code
+                                        ><code class="python value">0.1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">0.3</code
+                                        ><code class="python plain">])[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.9</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PDelta([</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">])[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4.5</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PDelta([</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain"
+                                            >], start</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.5</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PSquare()</code></h3>
+
+        <p>Returns the series of square numbers.</p>
+
+        <div>
+            <div id="highlighter_947411" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PSquare()[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">16</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">25</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">36</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">49</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">64</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">81</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PSquare()[</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">:</code
+                                        ><code class="python value">20</code
+                                        ><code class="python plain">] </code
+                                        ><code class="python keyword">%</code>
+                                        <code class="python value">7</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PIndex()</code></h3>
+
+        <p>Returns the series of whole numbers.</p>
+
+        <div>
+            <div id="highlighter_79514" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PIndex()[:</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PFibMod()</code></h3>
+
+        <p>
+            Returns the
+            <a
+                href="https://en.wikipedia.org/wiki/Fibonacci_number"
+                >Fibonacci </a
+            >sequence.
+        </p>
+
+        <div>
+            <div id="highlighter_770002" class="syntaxhighlighter brush plain">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="plain plain"
+                                            >&gt;&gt;&gt; PFibMod()[:10]</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="plain plain"
+                                            >P[0, 1, 1, 2, 3, 5, 8, 13, 21,
+                                            34]</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3><code>PZ12(tokens = [0, 1], p = [1, 0.5])</code></h3>
+
+        <p>
+            Simple implementation of the Z12 algorithm for pre-determined random
+            numbers. Using an irrational value for p, however, results in a
+            non-determined order of values. <em>Experimental</em> – only works
+            with 2 values.
+        </p>
+
+        <div>
+            <div id="highlighter_997269" class="syntaxhighlighter brush python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PZ12([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">])[:</code
+                                        ><code class="python value">15</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; PZ12([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain"
+                                            >, math.sqrt(</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)])[:</code
+                                        ><code class="python value">15</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- .entry-content -->
+</article>

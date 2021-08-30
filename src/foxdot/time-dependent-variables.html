@@ -1,0 +1,558 @@
+<article id="post-513" class="post-513 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">1.4 Time Dependant Variables</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <h2>Programming in time</h2>
+
+        <p>
+            When you are live coding music you will often want things to change
+            over time. One good way to demonstrate this is using chord
+            sequences. Let’s say you have the sequence C-F-C-G, which we can
+            represent as the Python list <code>[0, 3, 0, 4]</code>, and we want
+            to play the chords for 8 beats each but with a player that is
+            playing notes every quarter beats. How do we do this? One solution
+            might be to use the Pattern <code>stutter</code> method that repeats
+            values in a Pattern “n” times:
+        </p>
+
+        <div>
+            <div id="highlighter_710009" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain">(P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >].stutter(</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">) </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">))</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">P[P(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">), P(</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">)]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            So to play the chord sequence above with a “pluck” sound we might do
+            something like this:
+        </p>
+
+        <div>
+            <div id="highlighter_9036" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >].stutter(</code
+                                        ><code class="python value">32</code
+                                        ><code class="python plain">), dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">) </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            At 4 notes per beat and 8 beats per chord we can easily work out
+            that we need to stutter each pitch value 32 times. The problem is we
+            have to change that value whenever we change the duration. If we
+            change our duration to <code>[1/2, 1/4, 1/4]</code> we would need to
+            do some maths in our head (or using Python) to calculate how many
+            times to stutter the pitch values. To avoid this we can use
+            variables that change their value over time so after 8 beats we
+            automatically start playing a different pitch. These are known as
+            “time-dependent variables” or “TimeVar” for short.
+        </p>
+
+        <p>
+            A TimeVar has a series of values that it changes between after a
+            pre-defined number of beats and is created using a
+            <code>var</code> object with the syntax
+            <code>var([list_of_values],[list_of_durations])</code>. Example:
+        </p>
+
+        <div>
+            <div id="highlighter_258423" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; a </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">],</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python comments"
+                                            ># Duration can be single
+                                            value</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain">(</code
+                                        ><code class="python functions"
+                                            >int</code
+                                        ><code class="python plain"
+                                            >(Clock.now()), a)&nbsp;&nbsp; </code
+                                        ><code class="python comments"
+                                            ># 'a' initially has a value of 0
+                                            when 0 beats have elapsed</code
+                                        >
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain">(</code
+                                        ><code class="python functions"
+                                            >int</code
+                                        ><code class="python plain"
+                                            >(Clock.now()), a)&nbsp;&nbsp; </code
+                                        ><code class="python comments"
+                                            ># After 4 beats, the value changes
+                                            to 3</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain">(</code
+                                        ><code class="python functions"
+                                            >int</code
+                                        ><code class="python plain"
+                                            >(Clock.now()), a)&nbsp;&nbsp; </code
+                                        ><code class="python comments"
+                                            ># After another 4 beats, the value
+                                            changes back to 0</code
+                                        >
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            So to solve our original problem with playing a chord sequence, we
+            could use the following code with any value for duration and we
+            would still here the sequence play for 8 beats per chord:
+        </p>
+
+        <div>
+            <div id="highlighter_806936" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">], </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">), dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">]) </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h2>Transforming TimeVars</h2>
+
+        <p>
+            When you use mathematical operation on a <code>var</code>, a new
+            <code>var</code> is returned that also changes its value over time:
+        </p>
+
+        <div>
+            <div id="highlighter_521858" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; a </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; b </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">a </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python value">5</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(a,
+                                            b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python comments"
+                                            ># Current time = 0</code
+                                        >
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(a,
+                                            b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python comments"
+                                            ># beat = 4</code
+                                        >
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code>
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; c </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">PRange(</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">) </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">a</code>
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(c)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python comments"
+                                            ># beat = 8 and 'a' has a value of
+                                            0</code
+                                        >
+                                    </div>
+                                    <div class="line number9 index8 alt2">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number10 index9 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(c)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </code
+                                        ><code class="python comments"
+                                            ># beat = 12 and a has a value of
+                                            3</code
+                                        >
+                                    </div>
+                                    <div class="line number11 index10 alt2">
+                                        <code class="python plain">P[</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h2>Continuous change</h2>
+
+        <p>
+            So far we’ve only seen a TimeVar take on one of a set of predefined
+            values but There are also types of TimeVar that gradually change
+            between their values over time. One such example is the
+            <code>linvar</code>. This is instantiated the same way as a
+            <code>var</code> but the value changes linearly between states over
+            time. The example below moves the panning from left to right over 8
+            beats and then back again.
+        </p>
+
+        <div>
+            <div id="highlighter_11214" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, pan</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">], </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">))</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- .entry-content -->
+</article>
