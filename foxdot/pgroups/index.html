@@ -1,0 +1,119 @@
+<div class="card tutorial">
+    <div class="card-header">
+        <h4>3.4. Pgroups</h4>
+    </div>
+    <div class="card-body">
+        <h1>Basics</h1>
+        <p>
+            Where Patterns are a list of values that are played in sequence,
+            PGroups are groups of values that are played at the same time.
+            Whenever you use a tuple in a Player or a Pattern, it is
+            automatically converted into a PGroup, which, like Patterns, are
+            denoted by the upper-case <code>P</code> at its start:
+        </p>
+        <pre><code class="language-python">&gt;&gt;&gt; print(P[0, 1, 2, (3, 4, 5)])
+P[0, 1, 2, P(3, 4, 5)]
+</code></pre>
+        <p>
+            Many Pattern methods can also be applied to PGroups, such as
+            <code>mirror</code> and <code>shuffle</code>. This relationship also
+            extends to ‘lacing’ PGroups; using a list or a Pattern as a value in
+            a PGroup will create a Pattern of PGroups using the sequence of
+            values in turn like so:
+        </p>
+        <pre><code class="language-python"># Lacing a PGroup
+&gt;&gt;&gt; print(P(0, 1, [2, 3]))
+P[P(0, 1, 2), P(0, 1, 3)]
+
+# Lacing a PGroup within a Pattern
+&gt;&gt;&gt; print(P[0, 1, P(2, 3, [4, 5])])
+P[0, 1, P[P(2, 3, 4), P(2, 3, 5)]]
+
+# Lacing a PGroup with multiple lists
+&gt;&gt;&gt; print(P(0, [1, 2], [3, 4, 5]))
+P[P(0, 1, 3), P(0, 2, 4), P(0, 1, 5), P(0, 2, 3), P(0, 1, 4), P(0, 2, 5)]
+</code></pre>
+        <h1>Extended PGroups</h1>
+        <p>
+            An extended PGroup, also known as a “PGroup Prime”, contain extra
+            information about how the values in the PGroup are used by a Player
+            object. Inserting a mathematical operator, such as ‘+’, will
+            activate a type of behaviour when used within a Player. These
+            usually change the notes from being played simultaneously to
+            spreading them over a period of time. Here are a list of extended
+            PGroups and some example code:
+        </p>
+        <h2>PGroup-Star</h2>
+        <h2><code>P*(x, y, z, ...)</code></h2>
+        <p>
+            Will play the contents of the PGroup spread equally over the
+            Player’s current <code>dur</code> value.
+        </p>
+        <pre><code class="language-python"># Plays 3 notes over 2 beats at 2/3 beats duration each
+p1 &gt;&gt; pluck(P*(0, 2, 4), dur=2)
+
+# Plays the notes in opposite stereo channel every 4 note
+p1 &gt;&gt; pluck(dur=1/2, pan=PStep(4, P*(-1, 1)))
+</code></pre>
+        <h2>PGroup-Plus</h2>
+        <h2><code>P+(x, y, z, ...)</code></h2>
+        <p>
+            Will play the contents of the PGroup spread equally over the
+            Player’s current <code>sus</code> value, regardless of the
+            <code>dur</code>.
+        </p>
+        <pre><code class="language-python"># Play 4 notes over a 1 beat sustain
+p1 &gt;&gt; pluck(P+(0, 2, 4, 6), dur=PDur(3,8), sus=1)
+
+# Vary the sustain to hear the difference
+p1 &gt;&gt; pluck([0, 2, P+(0, 2, 4)], dur=PDur(3,8)*2, sus=var([0.75, 1.5, 3]))
+</code></pre>
+        <h2>PGroup-DoubleStar</h2>
+        <h2><code>P**(x, y, z, ...)</code></h2>
+        <p>Same as PGroup-Star but randomises the order notes are played in.</p>
+        <pre><code class="language-python"># Arpeggiate the chord in a random order
+p1 &gt;&gt; pluck(P[0, 1, 2, P**(3, 5, 7, 9)])
+</code></pre>
+        <h2>PGroup-Div</h2>
+        <h2><code>P/(x, y, z, ...)</code></h2>
+        <p>
+            Same as PGroup-Start but only delays the notes every other time the
+            group is played.
+        </p>
+        <pre><code class="language-python"># Arpeggiate the chord every other loop
+p1 &gt;&gt; pluck(P[0, 1, 2, P/(3, 5, 7, 9)])
+</code></pre>
+        <h2>PGroup-Pow</h2>
+        <h2><code>P^(x, y, z, ..., dur)</code></h2>
+        <p>
+            Uses the last value of the PGroup to set the delay between each note
+            instead of using a Player’s <code>dur</code> or
+            <code>sus</code> value.
+        </p>
+        <pre><code class="language-python"># Force delay of 0.5 beats per note
+p1 &gt;&gt; pluck([0, 2, P^(3, 5, 7, 0.5)], dur=1, sus=4)
+</code></pre>
+    </div>
+
+    <div class="card-footer">
+        <div class="d-flex justify-content-between">
+            <div class="btn-group">
+                <a class="btn btn-share clickable"
+                    ><span class="d-none d-sm-inline">Share </span
+                    ><i class="bi-share"></i
+                ></a>
+            </div>
+            <div>
+                <a href="/foxdot/pattern-generators/" class="btn btn-primary"
+                    ><i class="bi-chevron-double-left"></i>
+                    <span class="d-none d-sm-inline">Back</span></a
+                >
+
+                <a href="/foxdot/timevar-basics/" class="btn btn-primary"
+                    ><span class="d-none d-sm-inline">Next</span>
+                    <i class="bi-chevron-double-right"></i
+                ></a>
+            </div>
+        </div>
+    </div>
+</div>

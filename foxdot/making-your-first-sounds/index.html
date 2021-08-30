@@ -1,0 +1,94 @@
+<div class="card">
+    <div class="card-header">
+        <h4>1.1. Making Your First Sounds</h4>
+    </div>
+    <div class="card-body">
+        <h1>Opening the FoxDot Editor</h1>
+        <p>
+            Congratulations on getting FoxDot installed – let’s make some
+            sounds! First you need to open SuperCollider so that we can load up
+            sounds from FoxDot. Once SuperCollider opens, type the following
+            into the editor:
+        </p>
+        <pre><code class="language-javascript">FoxDot.start
+</code></pre>
+        <p>
+            This tells SuperCollider to start listening for messages from
+            FoxDot. To run this line of code you need put your text cursor on
+            the line and press <code>Ctrl+Return</code>. The line should flash
+            and you should see some numbers turn green in the bottom of your
+            screen:
+        </p>
+        <p>
+            <img
+                alt="SuperCollider Boot Up"
+                src="/web/20210408161919im_/https://foxdot.org/static/images/docs/sc_bootup.png"
+            />
+        </p>
+        <p>
+            Now we can open the FoxDot editor and begin making sounds. You can
+            open the editor by going to your command line application (Command
+            Prompt on Windows, Terminal on Mac and Linux) and typing in the
+            following bit of code and pressing enter:
+        </p>
+        <pre><code class="language-shell">$ python -m FoxDot
+</code></pre>
+        <p>
+            This tells your computer to run the Python interpreter and run the
+            FoxDot module as a standalone script. You should be greeted with a
+            window that looks something like this:
+        </p>
+        <p>
+            <img
+                alt="FoxDot Editor"
+                src="/web/20210408161919im_/https://foxdot.org/static/images/docs/foxdot_editor.png"
+            />
+        </p>
+        <h1>Evaluating Code</h1>
+        <p>
+            What you have here is an interactive text editor; you can write code
+            but also run the code within the editor itself. To execute a block
+            of code (lines not separated by blank lines) make sure your text
+            cursor is in the block of code you want to evaluate and press
+            <code>Ctrl+Enter</code> on Windows/Linux or
+            <code>Command+Return</code> on Mac. The text should flash red for a
+            brief moment and be printed to the console on the bottom of the
+            screen like so:
+        </p>
+        <p>
+            <img
+                alt="FoxDot editor with code execution"
+                src="/web/20210408161919im_/https://foxdot.org/static/images/docs/foxdot_editor.png"
+            />
+        </p>
+        <p>
+            Let’s make a simple noise. Type the following into the FoxDot editor
+            and evaluate it:
+        </p>
+        <pre><code class="language-python">p1 &gt;&gt; pluck()
+</code></pre>
+        <p>
+            This should start a very basic loop playing one plucked note on
+            repeat. To stop this, add <code>.stop()</code> to the end of the
+            line so it looks like this:
+        </p>
+        <pre><code class="language-python">p1 &gt;&gt; pluck().stop()
+</code></pre>
+        <p>
+            Evaluate the line to stop the loop. There you go! You’ve made sound
+            with FoxDot – have a look at the rest of the “Getting Started”
+            section to get to grips with other aspects of the environment before
+            moving onto the advanced sections… and have fun!
+        </p>
+    </div>
+    <div class="control-buttons alert card-footer">
+        <div></div>
+        <div>
+            <a
+                href="/foxdot/player-object-intro"
+                class="btn btn-primary"
+                >Next <i class="bi-chevron-double-right"></i
+            ></a>
+        </div>
+    </div>
+</div>

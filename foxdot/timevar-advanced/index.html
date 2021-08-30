@@ -1,0 +1,278 @@
+<article id="post-686" class="post-686 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">4.3 TimeVar Advanced</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <p>
+            This section outlines some more functionality of the TimeVar class
+            that weren’t covered in the
+            <a href="/foxdot/timevar-basics/">TimeVar Basics</a>
+            page.
+        </p>
+
+        <h2>TimeVar Singletons</h2>
+
+        <p>
+            These are instances of the TimeVar that already exist when FoxDot
+            boots up and represent changing values, such as the clock beat, and
+            can be used just like and other TimeVar:
+        </p>
+
+        <ul>
+            <li><code>now</code> – represents the current clock beat</li>
+            <li>
+                <code>nextbar</code> – represents the beat at the start of the
+                next bar
+            </li>
+        </ul>
+
+        <h2>Advanced Features</h2>
+
+        <h5>Offsetting the start time</h5>
+
+        <p>
+            Let’s say you want to create a chord sequence that changes not at
+            the beginning of a bar, after the first beat of the bar. How would
+            you do that with a TimeVar? Let’s have a look:
+        </p>
+
+        <div>
+            <div id="highlighter_306812" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Original chord sequence</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Update value after 1 beat of the
+                                            bar</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Not a very elegant solution but it would work. It would be easier
+            just to offset the start point of the durations by a single beat,
+            wouldn’t it? This can be achieved by using the
+            <code>start</code> keyword like so:
+        </p>
+
+        <div>
+            <div id="highlighter_865612" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain"
+                                            >], start</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            This can be combined with the <code>now</code> singleton to ‘start’
+            a <code>linvar</code>‘s cycle immediately. For example, we can ramp
+            up a player’s amplitude from 0 to 1 over 8 beats, starting now:
+        </p>
+
+        <div>
+            <div id="highlighter_269835" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, amp</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">], </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain"
+                                            >, start</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">now))</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h5>Infinite duration</h5>
+
+        <p>
+            Sometimes it might be preferable for a TimeVar to reach a value and
+            then <em>stay</em> that value. To do this we use a special variable
+            called <code>inf</code>. It is a
+            <a href="https://en.wikipedia.org/wiki/Singleton_variable"
+                >singleton</a
+            >, which means its an instance of a class but there is only one of
+            it and can be used to tell a TimeVar not to change its value once
+            reached. Here’s an example of a <code>linvar</code> ramping up
+            amplitude to 1 over 8 beats and then staying there:
+        </p>
+
+        <div>
+            <div id="highlighter_942318" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, amp </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain"
+                                            >, inf]))</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            This can also be combined with the <code>now</code> and
+            <code>nextbar</code> singletons to ramp up immediately:
+        </p>
+
+        <div>
+            <div id="highlighter_713310" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, amp </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain"
+                                            >, inf], start</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">now))</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            It’s worth noting that, when calculating the total cycle length off
+            the TimeVar, <code>inf</code> is counted as 0 until it is reached
+            once the TimeVar is implemented. That means that
+            <code>linvar</code> used above would be starting/re-starting its
+            cycle on every eighth beat.
+        </p>
+    </div>
+    <!-- .entry-content -->
+</article>

@@ -1,0 +1,758 @@
+<article id="post-563" class="post-563 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">4.1 TimeVar Basics</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <h3>Introduction</h3>
+
+        <p>
+            Music is something that occurs over time – changes in pitches,
+            durations, amplitudes and sounds – and a FoxDot TimeVar
+            (Time-dependant Variable) allows you to create values that change
+            over time. Here is how it works. You create a
+            <code>var</code> object and give it two inputs; a list of values you
+            want it to hold, and a list of durations (in beats) to hold those
+            values for. For example, take this TimeVar;
+        </p>
+
+        <div>
+            <div id="highlighter_642734" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            This will hold the value of 0 for 8 beats, then 1 for 4 beats, then
+            2 and 3 for 2 beats each. After this it will go back to the start of
+            the cycle and hold the value of 0 again for 8 beats. The basics are
+            also explained in the
+            <a href="/foxdot/time-dependant-variables/"
+                >TimeVar quick intro page here</a
+            >.
+        </p>
+
+        <p>
+            You can perform any mathematical operation on a TimeVar and it will
+            still change its value over time. So if you double the TimeVar
+            defined above like so:
+        </p>
+
+        <div>
+            <div id="highlighter_280753" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; a </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; b </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">a </code
+                                        ><code class="python keyword">*</code>
+                                        <code class="python value">2</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(a, b)</code
+                                        >
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">(</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Then after 8 beats pass and <code>a</code> has a value of 1, then
+            <code>b</code> will have a value of 2. After 4 more beats elapse,
+            <code>a</code> will have a value of 2 and <code>b</code> will have a
+            values of 4. You can add a list or tuple to a TimeVar to get a
+            Pattern of TimeVar values; this can be useful for transforming whole
+            melodies or rhythms for periods of time:
+        </p>
+
+        <div>
+            <div id="highlighter_492588" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">] </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >]), dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">PDur(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">) </code
+                                        ><code class="python keyword">*</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">], </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">))</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            You might notice a few things about the duration inputs for the
+            TimeVars above. First, no duration was supplied to the first TimeVar
+            – by default the duration will be the length of one bar (usually 4
+            beats) per value. Secondly, a single value was supplied to the
+            TimeVar, <code>var([1, 2], 8)</code>, instead of a list. In this
+            case, that duration is used for all the values in the TimeVar (i.e.
+            8 beats each).
+        </p>
+
+        <h3>Other features</h3>
+
+        <h4>1. Nested TimeVars</h4>
+
+        <p>
+            One useful feature with TimeVars is that you can
+            <strong>nest one inside another</strong> to subdivide a value’s…
+            errr, well, value. This is useful for creating more complex TimeVars
+            and is best explained with a trivial demonstration. Let’s say you’ve
+            created the following TimeVar during a FoxDot session:
+        </p>
+
+        <div>
+            <div id="highlighter_775154" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Now I want to change the last value on the last beat of the
+            TimeVar’s <em>second</em> cycle. Here is the manual way to do it:
+        </p>
+
+        <div>
+            <div id="highlighter_921661" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            This is too much typing and starting to look messy. We could also
+            add another TimeVar to our original:
+        </p>
+
+        <div>
+            <div id="highlighter_577169" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">]) </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">], [</code
+                                        ><code class="python value">15</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Not bad, but it requires us knowing the length of the cycle and the
+            number with have to add to our original value to get our desired
+            one. Here’s how do it using nested TimeVars. First, use a nested
+            list to alternate the last value of the cycle, then use a TimeVar
+            with that nested list like so:
+        </p>
+
+        <div>
+            <div id="highlighter_460815" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, [</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain"
+                                            >, var([</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">], </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)]), [</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            This is a manageable way of creating more complex TimeVars without
+            having to keep track of durations for each value used. You don’t
+            always need to use the nested list, but it was useful for the
+            purpose of this example. More practical examples of this technique
+            will be shown in other parts of the documentation.
+        </p>
+
+        <h4>2. Named TimeVars</h4>
+
+        <p>
+            Sometimes it might be useful to utilise a TimeVar in multiple
+            locations in your code. An example of this might be sharing a chord
+            sequence between Player Objects. Here’s how you might go about doing
+            this:
+        </p>
+
+        <div>
+            <div id="highlighter_254698" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain">chords </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; blip(chords </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain"
+                                            >p2 &gt;&gt; pasha(chords </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            What happens when you want to change the chord sequence? Try running
+            this code in FoxDot for yourself. If you change the value in
+            <code>chords</code> then the music doesn’t change unti you re-run
+            the lines of code corresponding the <code>p1</code> and
+            <code>p2</code>. There is a way around this issue and that is to use
+            <strong>named TimeVars</strong>. To do this, all you need to do is
+            start your variable name with <code>var.</code> like so:
+        </p>
+
+        <div>
+            <div id="highlighter_159435" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >var.chords </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Then reference it using the same name such that your code looks like
+            this:
+        </p>
+
+        <div>
+            <div id="highlighter_116384" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; blip(var.chords </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python functions"
+                                            >oct</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p2 &gt;&gt; pasha(var.chords </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">9</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Now FoxDot keeps track of that variable name and will update any
+            player objects using it when its updated. So if you run your new
+            code and change the value of <code>var.chords</code> to something
+            else:
+        </p>
+
+        <div>
+            <div id="highlighter_696532" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >var.chords </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>The music will change instantly. Neat!</p>
+
+        <h4>3. Transformations</h4>
+
+        <p>
+            You have already seen that you can do simple transformations of a
+            TimeVar by performing arithmetic operations on them, e.g. addition
+            and multiplication. You can also transform values using your own
+            pre-defined functions or inline lambda functions (if you are an
+            advanced Python user). However, you cannot simply just use
+            <code>my_function(my_timevar)</code> unless the function is only
+            performing basic mathematical operations. If it is doing something
+            more complex, such as using if-else statements, then you need to
+            know about the TimeVar <code>transform</code> method. Let’s look at
+            an example:
+        </p>
+
+        <p>
+            Here is my arbitrary function that returns 5 if its input is odd and
+            3 if its input is even:
+        </p>
+
+        <div>
+            <div id="highlighter_656053" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python keyword">def</code>
+                                        <code class="python plain"
+                                            >odd_test(num):</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python spaces"
+                                            >&nbsp;&nbsp;&nbsp;&nbsp;</code
+                                        ><code class="python keyword"
+                                            >return</code
+                                        >
+                                        <code class="python value">5</code>
+                                        <code class="python keyword">if</code>
+                                        <code class="python plain">num </code
+                                        ><code class="python keyword">%</code>
+                                        <code class="python value">2</code>
+                                        <code class="python keyword">=</code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python value">1</code>
+                                        <code class="python keyword">else</code>
+                                        <code class="python value">3</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>And here is my TimeVar:</p>
+
+        <div>
+            <div id="highlighter_158526" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain">my_var </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            If I call <code>odd_test(my_var)</code> then it will return its
+            output (3 or 5) based on the current value of
+            <code>my_var</code> and the value will stay the same, even if
+            <code>my_var</code> changes. Try it yourself to see. To make sure
+            you always return the correct value given <code>my_var</code> as an
+            input, you need to call the <code>transform</code> method, which
+            takes a callable object, usually a function, as an input. Note that
+            this callable function can only take one argument as an input.
+        </p>
+
+        <div>
+            <div id="highlighter_663829" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >my_output </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain"
+                                            >my_var.transform(odd_test)</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Now <code>my_output</code> will always be 5 whenever
+            <code>my_var</code> is odd and 3 whenever it is even. If you are an
+            advanced Python user you can even create a class with a
+            <code>__call__</code> method present to create a callable object and
+            use that as an input for the <code>transform</code> method to hold
+            some sort of state between transformations e.g. count the number of
+            times it was called and change the value every 10 times.
+        </p>
+    </div>
+    <!-- .entry-content -->
+</article>

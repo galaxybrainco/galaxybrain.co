@@ -1,0 +1,113 @@
+<article id="post-545" class="post-545 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">6.1 Sending OSC Messages</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <p>
+            Open Sound Control (OSC) is a digital music communication protocol
+            and is becoming more and more prevalent in modern audio software.
+            Applications using OSC will have a server listening for messages
+            from a client – this is how FoxDot communicates with SuperCollider
+            to generate audio. Here’s a quick run through of how to send these
+            messages to other OSC applications from FoxDot.
+        </p>
+
+        <p>
+            It’s really simple; you just need to tell FoxDot to “forward” any
+            OSC messages. Let’s say your application is running on the local
+            host on port 12345, here’s the code for connecting to it:
+        </p>
+
+        <div>
+            <div id="highlighter_298242" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >Server.add_forward(</code
+                                        ><code class="python string"
+                                            >"localhost"</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">12345</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            And that’s it! Any time FoxDot sends an OSC message to
+            SuperCollider, it will also send it to the other OSC application
+            too. These messages are usually sent as a group together called an
+            “OSC Bundle” which contain a message about the note being played,
+            and also a message for each effect being applied. Here’s what the
+            note message looks like:
+        </p>
+
+        <p>
+            <code
+                >[address, synth-name, synth-id, add-action, target-id, arg-1,
+                value-1, arg-2, value-2, ...]</code
+            >
+        </p>
+
+        <p>
+            The “address” is basically the name of the function that the OSC
+            application should process the rest of the message with; for
+            SuperCollider this is usually <code>/s_new</code> and means “trigger
+            synth” and the “synth-name” is name of the SynthDef being triggered.
+            The “synth-id”, “add-action” and “target-id” values relate
+            specifically to SuperCollider so your application can probably
+            ignore these. Then come the arguments used, such as frequency and
+            amplitude, which are written in turn and separated by commas. Here’s
+            what a typical messages might look like
+        </p>
+
+        <p>
+            <code
+                >["/s_new", "pluck", 1001, 1, 0, "freq", 440, "amp", 1, "pan",
+                -1, "sus", 1]
+            </code>
+        </p>
+
+        <p>
+            So a “pluck” synth is creating a note with an amplitude of 1 at a
+            frequency of 440Hz with a sustain of 1 and a panning of -1. The
+            arguments all relate to the names of keyword arguments used by
+            FoxDot.
+        </p>
+
+        <p><strong>Other information</strong></p>
+
+        <p>
+            If you are getting this error –
+            <code
+                >FoxDot.lib.OSC3.OSCClientError: while sending: [Errno 111]
+                Connection refused</code
+            >
+            then please check your network connection settings are correct. On
+            Windows this will be ignored but MacOS and Linux will throw this
+            error every time you want to play a note.
+        </p>
+
+        <p>
+            For more information about how OSC messages are handled by
+            SuperCollider,
+            <a
+                href="http://danielnouri.org/docs/SuperColliderHelp/ServerArchitecture/Server-Command-Reference.html"
+                >here is a link to a great resource on the server command
+                architecture</a
+            >.
+        </p>
+    </div>
+    <!-- .entry-content -->
+</article>

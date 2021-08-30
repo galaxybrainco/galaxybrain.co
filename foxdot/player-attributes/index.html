@@ -1,0 +1,1664 @@
+<article id="post-516" class="post-516 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">2.1 Player Attributes</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <h2>Introduction</h2>
+
+        <p>
+            FoxDot player objects are assigned <code>SynthDefs</code> take
+            various keyword arguments in a set of brackets to manipulate the
+            sequences being played. You’ve probably already seen
+            <code>dur</code> and pan but what else can we use? There are lots of
+            options, which are broadly split into two groups: attributes and
+            effects. Attributes are things that affect <em>what</em> note is
+            played <em>when</em> and effects are things that change
+            <em>how</em> the sound, well, sounds! You can see a list of all of
+            the possible keyword terms by evaluating the code
+        </p>
+
+        <div>
+            <div id="highlighter_189952" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(Player.get_attributes()</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">(</code
+                                        ><code class="python string"
+                                            >'degree'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'oct'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'dur'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'delay'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'blur'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'amplify'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'scale'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'bpm'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'sample'</code
+                                        ><code class="python plain">,</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python string">'sus'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'fmod'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'pan'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'rate'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'amp'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'vib'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'vibdepth'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'slide'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'sus'</code
+                                        ><code class="python plain">,</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python string"
+                                            >'slidedelay'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'slidefrom'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'bend'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'benddelay'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'coarse'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'striate'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'pshift'</code
+                                        ><code class="python plain">,</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python string">'hpf'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'hpr'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'lpf'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'lpr'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'swell'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'bpf'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'bpr'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'bits'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'amp'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'crush'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'dist'</code
+                                        ><code class="python plain">,</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python string">'chop'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'tremolo'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'echo'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'decay'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'spin'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'cut'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'room'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'mix'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'formant'</code
+                                        ><code class="python plain">,</code>
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python string"
+                                            >'shape'</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Bear in mind that a SuperCollider <code>SynthDef</code> might take
+            specific keyword arguments that aren’t listed above. You can set the
+            values for a player’s attribute or effect by specifying them as a
+            keyword argument inside of a <code>SynthDef</code> call like so:
+        </p>
+
+        <div>
+            <div id="highlighter_954771" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, sus</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Or you can set the value directly to the player object attributes:
+        </p>
+
+        <div>
+            <div id="highlighter_537234" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck()</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1.degree </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain">p1.dur </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">p1.sus </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python value">2</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            This section will take you through the different attribute keywords
+            with some example code. If you want to know more about effects, you
+            can find more information in the next section.
+        </p>
+
+        <h2>Attributes</h2>
+
+        <p>
+            These are the keyword values that get used by FoxDot to decide what
+            note or sample gets played when. In no particular order they are:
+            <code>degree</code>, <code>oct</code>, <code>dur</code>,
+            <code>scale</code>, <code>amp</code>, <code>amplify</code>,
+            <code>bpm</code>, <code>sample</code>, and <code>delay</code>. We’ll
+            go through each of these in depth with some example code now.
+        </p>
+
+        <h3>degree</h3>
+
+        <p>
+            This is sometimes referred to as “pitch” and refers to the index of
+            the scale we should use to create a note – so to play the first note
+            of a scale, you use the degree value 0. You don’t need to specify
+            this one by name as it is <b>always</b> the first argument used.
+            Here is some example code that plays the first four notes of the
+            default scale (C major).
+        </p>
+
+        <div>
+            <div id="highlighter_26848" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>oct</h3>
+
+        <p>
+            This is the octave you want to play a note in. By default this is 5
+            so that the note you play when starting a “blank” player object is
+            middle C. An octave is (usually) 12 semitones, so the 5th octave
+            starts at the 60th semitone. We add this value to our pitch (which
+            we get from using the <code>degree</code> to get the final note
+            value. A smaller number plays a lower note and a larger number plays
+            a higher note:
+        </p>
+
+        <div>
+            <div id="highlighter_920525" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(</code
+                                        ><code class="python functions"
+                                            >oct</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>dur</h3>
+
+        <p>
+            This is the duration of a note. Durations cannot be negative and
+            must contain at least one non-zero number. A duration can be any
+            type as long as it can be represented by a floating point value. The
+            following are all valid durations:
+        </p>
+
+        <div>
+            <div id="highlighter_11475" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Single value for all notes</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># A list of durations can be
+                                            integers, fractions, or floating
+                                            point values</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">0.1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.3</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.43</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.17</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            You can “skip” a note by setting the duration to zero or “mute” it
+            by using a <code>rest</code> object with the duration in brackets:
+        </p>
+
+        <div>
+            <div id="highlighter_944762" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Skip every 3rd note</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Rest every 3rd note for 2
+                                            beats</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain"
+                                            >, rest(</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>scale</h3>
+
+        <p>
+            As the name suggests, this sets the scale of the player object. This
+            must be a <code>list</code>, <code>Pattern</code>, or a
+            <code>Scale</code> object (which is a subclass of Pattern). To see a
+            list of scales, you can evaluate the following code:
+        </p>
+
+        <div>
+            <div id="highlighter_439519" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >&gt;&gt;&gt; </code
+                                        ><code class="python functions"
+                                            >print</code
+                                        ><code class="python plain"
+                                            >(Scale.names())</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain">[</code
+                                        ><code class="python string"
+                                            >'aeolian'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'chinese'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'chromatic'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'custom'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'default'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'diminished'</code
+                                        ><code class="python plain">,</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python string"
+                                            >'dorian'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'dorian2'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'egyptian'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'freq'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'harmonicMajor'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'harmonicMinor'</code
+                                        ><code class="python plain">,</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python string"
+                                            >'indian'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'justMajor'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'justMinor'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'locrian'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'locrianMajor'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'lydian'</code
+                                        ><code class="python plain">,</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python string"
+                                            >'lydianMinor'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'major'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'majorPentatonic'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'melodicMajor'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'melodicMinor'</code
+                                        ><code class="python plain">,</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python string"
+                                            >'minor'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'minorPentatonic'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'mixolydian'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'phrygian'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string"
+                                            >'prometheus'</code
+                                        ><code class="python plain">,</code>
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python string"
+                                            >'romanianMinor'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'yu'</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python string">'zhi'</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain">﻿</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            By default, FoxDot uses the “major” scale. To change this to the
+            minor scale, for example, you can use the <code>scale</code> keyword
+            argument and the <code>Scale.minor</code> scale like so:
+        </p>
+
+        <div>
+            <div id="highlighter_177846" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Play the major scale by
+                                            default</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Change to minor</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain"
+                                            >], scale</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >Scale.minor)</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            If you want to change the scale for <i>all</i> players, you can set
+            the <code>Scale.default</code> value:
+        </p>
+
+        <div>
+            <div id="highlighter_360361" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Start a player in the default
+                                            scale (Major)</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Change the default scale to
+                                            Dorian</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >Scale.default </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain"
+                                            >Scale.dorian</code
+                                        >
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># You can specify the default scale
+                                            as a string</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >Scale.default </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python string"
+                                            >"dorian"</code
+                                        >
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>amp</h3>
+
+        <p>
+            This is the amplitude of a note, or its volume/loudness. The values
+            usually go between 0 and 1 but you can set larger values to make a
+            note even louder but be careful not to go too loud or you could
+            damage your ears / speakers!
+        </p>
+
+        <div>
+            <div id="highlighter_928421" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">], amp</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            We can create quite rhythmic patterns using <code>amp</code> by
+            using values of 0 as well:
+        </p>
+
+        <div>
+            <div id="highlighter_453014" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python spaces"
+                                            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code
+                                        ><code class="python plain">dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces"
+                                            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code
+                                        ><code class="python plain">amp</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">]</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            But what happens if we want to play this rhythm every
+            <em>other</em> bar? One way might be to manually add a lot of 0s to
+            the sequence or use a <code>Pattern</code> object and use its
+            <code>stutter</code> method but we can also use another keyword
+            argument designed for just this purpose; <code>amplify</code>.
+        </p>
+
+        <h3>amplify</h3>
+
+        <p>
+            Before a sound gets triggered by a player, the
+            <code>amp</code> value is multiplied by <code>amplify</code> so that
+            you can use things like <code>TimeVar</code> to set an amplitude to
+            be 1 or 0 (i.e. on and off) for certain amount of time:
+        </p>
+
+        <div>
+            <div id="highlighter_690312" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python spaces"
+                                            >&nbsp;&nbsp;&nbsp;&nbsp;</code
+                                        ><code class="python plain">dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces"
+                                            >&nbsp;&nbsp;&nbsp;&nbsp;</code
+                                        ><code class="python plain">amp</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">], </code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python spaces"
+                                            >&nbsp;&nbsp;&nbsp;&nbsp;</code
+                                        ><code class="python plain"
+                                            >amplify</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">var([</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">],[</code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain">) </code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            This is useful if you want to set multiple players to be “on” or
+            “off” at the same time:
+        </p>
+
+        <div>
+            <div id="highlighter_803897" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, amp</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p2 &gt;&gt; bass(var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">), dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain"
+                                            >p1.amplify </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain"
+                                            >p2.amplify </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">],</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            The last line is quite clumsy so you can use a
+            <code>Group</code> object in place (see
+            <a href="/foxdot/groups/">here</a>
+            for more information):
+        </p>
+
+        <div>
+            <div id="highlighter_253644" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, amp</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p2 &gt;&gt; bass(var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">), dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain"
+                                            >Group(p1, p2).amplify </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">var([</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">],</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>bpm</h3>
+
+        <p>
+            If you want a player object to play at a different tempo you can use
+            the <code>bpm</code> attribute. This is the beats per minute. The
+            global scheduling clock tempo can be set by changing its bpm
+            attribute using <code>Clock.bpm = 140</code> for example (see
+            <a href="/foxdot/using-the-tempoclock/">here</a>
+            for more information).
+        </p>
+
+        <div>
+            <div id="highlighter_351282" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Plays at the Clock.bpm tempo
+                                            (default 120)</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Force player to use 100 bpm</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p2 &gt;&gt; bell([</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">], bpm</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">100</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># It will always play at 100 bpm
+                                            even if Clock.bpm is changed</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >Clock.bpm </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python value">200</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>sample</h3>
+
+        <p>
+            This is only used with the sample player, called <code>play</code>.
+            This <code>SynthDef</code> takes a string as its first argument
+            (known as the “play string”) instead of a list of pitch values and
+            plays audio samples stored on your laptop based on the character in
+            the string. Each character is mapped to a folder of samples and by
+            default, it plays the first sample in that folder. To play a
+            different sample, use the <code>sample</code> keyword:
+        </p>
+
+        <div>
+            <div id="highlighter_482613" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Default samples</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># A different set of samples</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain"
+                                            >, sample</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Can be a list of values</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain"
+                                            >, sample</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Values must be an integer. If a folder contains 3 samples and you
+            use the value 4, the player object will loop back round to the first
+            file in the folder and play that one, so you don’t need to know
+            exactly how many samples are in a folder.
+        </p>
+
+        <h3>delay</h3>
+
+        <p>
+            In music (and especially electronic music) delay often refers to a
+            sort of “echo” effect where a sound is played again a short period
+            after it begins, but a little quieter. In FoxDot, however, it
+            literally refers to an amount of time, in beats, to delay a sound
+            from being played. Here, we’ll delay every third note by half a
+            beat:
+        </p>
+
+        <div>
+            <div id="highlighter_996403" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain"
+                                            >], delay</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            If you want to play the note <b>and</b> play it with a delay, you
+            can use a tuple or <code>PGroup</code> with the first value being 0,
+            meaning no delay. The second value will indicate how long to delay
+            the second note:
+        </p>
+
+        <div>
+            <div id="highlighter_759937" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># "Stutter" every third note</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain"
+                                            >], delay</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, (</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">)])</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Delay a note to play *after* the
+                                            following one</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain"
+                                            >], delay</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, (</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1.5</code
+                                        ><code class="python plain">)])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>root</h3>
+
+        <p>
+            Just as you can use a different scale to the
+            <code>Scale.default</code> from inside a player, you can also use a
+            different root note (more information
+            <a href="/foxdot/roots-and-scales/">here</a>). This must be a number
+            or sequence of numbers and not a note name i.e. <code>"C#"</code>
+        </p>
+
+        <div>
+            <div id="highlighter_381237" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Change the root every 8
+                                            beats</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; blip([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, sus</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, root</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">var([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">], </code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">))</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- .entry-content -->
+</article>

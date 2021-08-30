@@ -1,0 +1,2228 @@
+<article id="post-521" class="post-521 page type-page status-publish hentry">
+    <header class="entry-header">
+        <h1 class="entry-title">2.2 Player Effects</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        <h2>Introduction</h2>
+
+        <p>
+            Effects can be added to a Player in the same way that its attributes
+            are changed; using keyword arguments. Just as with the Player
+            attributes, these can be a single value, or a sequence. This page
+            contains descriptions of the different effects available in FoxDot
+            and how to apply them.
+        </p>
+
+        <p>
+            Most effects are applied using a single value, such
+            as&nbsp;<code>pan</code>, but some have a single “parent” and one or
+            more “child” effect. One example is&nbsp;<code>slide</code>, which
+            is the parent, and&nbsp;<code>slidedelay</code>&nbsp;is the child.
+            If the parent effect is set to 0, then the effect is not applied.
+            Child values of 0 are still applied if the parent is nonzero
+        </p>
+
+        <div>
+            <div id="highlighter_576496" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Slide effect added</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, slide</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain"
+                                            >, slidedelay</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Slide effect not added</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, slide</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain"
+                                            >, slidedelay</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Slide effect added, with zero
+                                            delay</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, slide</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain"
+                                            >, slidedelay</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Sustain</h3>
+
+        <p>Keywords: <code>sus</code>, <code>blur=1</code></p>
+
+        <p>
+            The keyword argument&nbsp;<code>sus</code>&nbsp;is used to set the
+            “sustain” of a note, which means how long the sound of the note
+            lasts. By default this is the same as the note’s duration (set using
+            the&nbsp;<code>dur</code>&nbsp;keyword) and is a value measured in
+            terms of “beats”. The following code will play a 1-beat note one
+            repeat with a half-beat sustain:
+        </p>
+
+        <div>
+            <div id="highlighter_201140" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># One beat duration, half-beat
+                                            duration</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, sus</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Use&nbsp;<code>blur</code>&nbsp;to create a “legato” effect (a word
+            which means “tied together” in Italian). This is a musical term that
+            refers to how smoothly notes follow on from one another,
+            or&nbsp;<em>blur</em>&nbsp;together.
+            The&nbsp;<code>sus</code>&nbsp;value is multiplied by the
+            current&nbsp;<code>blur</code>&nbsp;value such that the following
+            code doubles the length of every other note’s sustain:
+        </p>
+
+        <div>
+            <div id="highlighter_16885" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Doubles the length of every other
+                                            note</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">PDur(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain"
+                                            >), blur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Stereo Panning</h3>
+
+        <p>Keywords: <code>pan</code></p>
+
+        <p>
+            Panning (in audio) is the distribution of sound across multiple
+            speakers. Currently FoxDot only uses two output channels (for the
+            left and right speaker) but there are plans to expand this for
+            multiple speakers. To change the panning of a sound, use
+            the&nbsp;<code>pan</code>&nbsp;and set the value between -1 (hard
+            left) and 1 (hard right). A&nbsp;pan&nbsp;value of 0 sends the audio
+            signal out of both speakers equally.
+        </p>
+
+        <div>
+            <div id="highlighter_261385" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Alternate between left, center,
+                                            and right</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(pan </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python plain">[</code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Play two notes at the same time,
+                                            but in different speakers</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck((</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">), pan</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">(</code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">))</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Gradually move the sound's
+                                            panning from left to right using a
+                                            "linvar"</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, pan</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">],</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">))</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Frequency Modifier</h3>
+
+        <p>Keywords: <code>fmod</code></p>
+
+        <p>
+            This adds a value to the frequency used to generate a note, but only
+            in one of the channels. For example, starting a player with no
+            instructions will continually play a note on middle C, which is
+            261.6 Hz, through both speaker channels.
+            Using&nbsp;<code>fmod&nbsp;=&nbsp;10</code>&nbsp;will play the note
+            at 261.6 Hz in one channel, and 271.6 Hz in the other. This creates
+            a noticeable “dissonance” or an “atonal” sound because the
+            frequencies are so close together. Using a smaller value, such as 2,
+            creates a sort of flanger effect:
+        </p>
+
+        <div>
+            <div id="highlighter_357480" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Simple flanger effect</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(fmod </code
+                                        ><code class="python keyword">=</code>
+                                        <code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Vary the effect over time</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(fmod</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">10</code
+                                        ><code class="python plain">],</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">), dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, sus</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Vibrato</h3>
+
+        <p>Keywords: <code>vib</code>, <code>vibdepth = 0.02</code></p>
+
+        <p>
+            Vibrato is a musical term that refers to a continual modulation of
+            pitch i.e. changing over time. You can set the rate of the vibrato
+            of a note by using the&nbsp;<code>vib</code>&nbsp;keyword and the
+            depth (the size of the modulation) of the vibrato by using
+            the&nbsp;<code>vibdepth</code>&nbsp;keyword. The depth defaults to
+            0.02, which means the vibrato fluctuates between +/- the note’s
+            frequency multiplied by 0.02. You can also think of it as
+            fluctuating between 99% and 101% of the frequency value.
+        </p>
+
+        <div>
+            <div id="highlighter_135417" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pads(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, vib</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pads(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, vib</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, vibdepth</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pads(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, vib</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, vibdepth</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Slide</h3>
+
+        <p>Keywords: <code>slide</code>, <code>slidedelay = 0</code></p>
+
+        <p>
+            This is used to change a note’s frequency over time. The frequency
+            “slides”
+            to&nbsp;<code>(1&nbsp;+&nbsp;n)&nbsp;*&nbsp;freq</code>&nbsp;where&nbsp;<code>n</code>&nbsp;is
+            the value supplied to the&nbsp;<code>slide</code>&nbsp;keyword. For
+            example, a&nbsp;<code>slide</code>&nbsp;value of 1 will slide the
+            frequency to twice its original value (one octave up). A
+            <code>slide</code>&nbsp;value of -1 will slide to a frequency of 0.
+        </p>
+
+        <p>
+            By default the slide effect starts immediately after the note
+            begins. To delay the start of the slide, you can use the&nbsp;<code
+                >slidedelay</code
+            >
+            keyword. This should be a value between 0 (the start of the note)
+            and 1 (the end of the note).
+        </p>
+
+        <div>
+            <div id="highlighter_721738" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Slide one octave up</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, slide</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Slide to 0</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, slide</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Delay the slide effect to start
+                                            half way through the note</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, slide</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain"
+                                            >, slidedelay</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Slide from</h3>
+
+        <p>Keywords: <code>slidefrom</code>, <code>slidedelay = 0</code></p>
+
+        <p>
+            Similar to&nbsp;<code>slide</code>,&nbsp;this effect also changes a
+            note’s frequency over time, but you specify where the slide starts.
+            The frequency “slides”
+            from&nbsp;<code>(1&nbsp;+&nbsp;n)&nbsp;*&nbsp;freq</code>&nbsp;where&nbsp;<code>n</code>&nbsp;is
+            the value supplied to the&nbsp;<code>slidefrom</code>&nbsp;keyword
+            and finishes at the note’s frequency.
+        </p>
+
+        <p>
+            For example, a&nbsp;<code>slidefrom</code>&nbsp;value of 1 will
+            slide the frequency from twice its original value (one octave up).
+            A&nbsp;<code>slidefrom</code>&nbsp;value of -1 will slide from a
+            frequency of 0. By default the slide effect starts immediately after
+            the note begins. To delay the start of the slide, you can use
+            the&nbsp;<code>slidedelay</code>&nbsp;keyword. This should be a
+            value between 0 (the start of the note) and 1 (the end of the note).
+        </p>
+
+        <div>
+            <div id="highlighter_94839" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Slide from one octave up</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, slidefrom</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Slide from 0</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, slidefrom</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Delay the slide effect to start
+                                            half way through the note</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, slidefrom</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain"
+                                            >, slidedelay</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Pitch bend</h3>
+
+        <p>Keywords: <code>bend</code>, <code>benddelay = 0</code></p>
+
+        <p>
+            Another effect similar to&nbsp;<code>slide</code>, pitch bend
+            changes the frequency of a note over a time but also returns to its
+            original frequency by the end of the note. Other than that it works
+            exactly the same as&nbsp;<code>slide</code>.
+        </p>
+
+        <div>
+            <div id="highlighter_307189" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Bends one octave up and back
+                                            again</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, bend</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Bend to 0 and back again</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, bend</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Delay the bend effect to start
+                                            half way through the note</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, slide</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, bend</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Chop</h3>
+
+        <p>Keywords: <code>chop</code></p>
+
+        <p>
+            This “chops” the audio signal into “n” parts, where “n” is the value
+            you supply to the keyword argument. It uses the sustain of the note
+            (set using&nbsp;<code>sus</code>) to determine the size of the
+            parts, so you can also
+            combine&nbsp;<code>chop</code>&nbsp;and&nbsp;<code>sus</code>&nbsp;to
+            create interesting effects.
+        </p>
+
+        <div>
+            <div id="highlighter_374220" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Chop a sound into 4 parts</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, chop</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># If the duration varies, the sizes
+                                            of chop will vary too</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,[</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain"
+                                            >]], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">PDur(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain"
+                                            >), chop</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Changing a single value for "sus"
+                                            evens out the sizes and creates a
+                                            nice overlapping echo effect</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,[</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">6</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain"
+                                            >]], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">PDur(</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain"
+                                            >), chop</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, sus</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Coarse</h3>
+
+        <p>Keywords: <code>coarse</code></p>
+
+        <p>
+            This is similar to “chop” but differs in that the audio signal isn’t
+            being “chopped” up, the control rate (the frequency of notes / the
+            playback rate for samples) is. This can be useful in several
+            situations.
+        </p>
+
+        <p>
+            The first is when playing samples using the <code>play</code> synth:
+            Using&nbsp;<code>chop</code>&nbsp;essentially only plays half the
+            audio as the other half is being muted by the “chop” effect.
+            Using&nbsp;<code>coarse</code>&nbsp;will essentially pause the sound
+            and resume it after a slight delay. It does this by setting the
+            playback rate to 0 whereas&nbsp;<code>chop</code>&nbsp;would set the
+            amplitude to 0. Listen to the difference by running the code below
+            in FoxDot:
+        </p>
+
+        <div>
+            <div id="highlighter_829883" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Using chop</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >c1 &gt;&gt; play(</code
+                                        ><code class="python string">"C"</code
+                                        ><code class="python plain">, dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, chop</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">16</code
+                                        ><code class="python plain"
+                                            >, coarse</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Using coarse</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >c1 &gt;&gt; play(</code
+                                        ><code class="python string">"C"</code
+                                        ><code class="python plain">, dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, coarse</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">16</code
+                                        ><code class="python plain">, chop</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Another use for&nbsp;<code>coarse</code>&nbsp;would be for when you
+            get “clipping” sounds when using&nbsp;<code>chop</code>. This occurs
+            when an amplitude goes to 0 very quickly and sounds like a tiny
+            “pop”. Run these lines of code in FoxDot and listen to the
+            differences:
+        </p>
+
+        <div>
+            <div id="highlighter_948868" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >b1 &gt;&gt; bass(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">, chop</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, coarse</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python plain"
+                                            >b1 &gt;&gt; bass(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain"
+                                            >, coarse</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, chop</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            The line using&nbsp;<code>coarse&nbsp;=&nbsp;4</code>&nbsp;sounds
+            that little bit cleaner. Unfortunately this doesn’t always happen
+            and the&nbsp;coarse&nbsp;can’t always be applied to some synths, for
+            example&nbsp;<code>klank</code>.
+        </p>
+
+        <h3>High-pass filter</h3>
+
+        <p>Keywords: <code>hpf</code>, <code>hpr = 1</code></p>
+
+        <p>
+            A non-trivial sound is made up of a combination of sound waves
+            vibrating at various frequencies and amplitudes, and some of these
+            can be “filtered out” from a signal using a filter. This is often
+            known as
+            <a href="https://en.wikipedia.org/wiki/Subtractive_synthesis"
+                >subtractive synthesis</a
+            >. A high pass filter will remove parts of a signal that are *below*
+            a certain frequency i.e. only lets frequencies through that are
+            higher than the threshold. This can be applied in FoxDot simply by
+            setting the&nbsp;<code>hpf</code>&nbsp;(short for high-pass filter)
+            value:
+        </p>
+
+        <div>
+            <div id="highlighter_635498" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Set the high pass filter cutoff
+                                            to 2000 Hz</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, hpf</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2000</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Set the cutoff to change over
+                                            time using a linvar</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, hpf</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">2000</code
+                                        ><code class="python plain">],</code
+                                        ><code class="python value">32</code
+                                        ><code class="python plain">))</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            You can also set the high-pass resonance for the filter using
+            the&nbsp;<code>hpr</code>&nbsp;keyword. This is sometimes referred
+            to as “rq” or “hpq”. As this value decreases, the overtones near the
+            cutoff value are boosted – a value close to 0 will sound like a sine
+            wave oscillating at the value set using&nbsp;<code>hpf</code>. Be
+            careful of very small and very large values as you might get very
+            loud sounds!
+        </p>
+
+        <div>
+            <div id="highlighter_979278" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Set the high pass filter cutoff
+                                            to 2000 Hz</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, hpf</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2000</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Set the resonance to 0.2 - can
+                                            you hear the difference?</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, hpf</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2000</code
+                                        ><code class="python plain">, hpr</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Set the cutoff *and* resonance to
+                                            change over time using linvar</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, hpf</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">2000</code
+                                        ><code class="python plain">],</code
+                                        ><code class="python value">32</code
+                                        ><code class="python plain">), hpr</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">0.1</code
+                                        ><code class="python plain">],</code
+                                        ><code class="python value">28</code
+                                        ><code class="python plain">))</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Low-pass filter</h3>
+
+        <p>Keywords: <code>lpf</code>, <code>lpr = 1</code></p>
+
+        <p>
+            Just as the high pass filter only allows through frequencies within
+            an audio signal&nbsp;<em>above</em>&nbsp;a certain cutoff, the low
+            pass filter only allows through frequencies within an audio
+            signal&nbsp;<em>below</em>&nbsp;a certain cutoff. The low pass
+            resonance,&nbsp;<code>lpr</code>, works in the same way that the
+            high pass resonance does too.
+        </p>
+
+        <div>
+            <div id="highlighter_477122" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Set the low pass filter cutoff to
+                                            400 Hz</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, lpf</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">400</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Changing the resonance - can you
+                                            hear the difference?</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, lpf</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">400</code
+                                        ><code class="python plain">, lpr</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Use a linvar to vary both values
+                                            over time</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, lpf</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python value">500</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">5000</code
+                                        ><code class="python plain">],</code
+                                        ><code class="python value">32</code
+                                        ><code class="python plain">), lpr</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain"
+                                            >linvar([</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">0.1</code
+                                        ><code class="python plain">],</code
+                                        ><code class="python value">28</code
+                                        ><code class="python plain">))</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Bitcrush</h3>
+
+        <p>Keywords: <code>crush</code>, <code>bits = 8</code></p>
+
+        <p>
+            Bitcrushing is a distortion effect created by reducing both the
+            sample rate of an audio signal and the bandwidth.
+            A&nbsp;<code>crush</code>&nbsp;value of 1 will reduce the bit-rate
+            of the signal to the value of&nbsp;<code>bits</code>, which is 8 by
+            default. Every increment to&nbsp;<code>crush</code>&nbsp;thereafter
+            reduces the sample rate of the signal (starting at 44.1 KHz) by
+            half. The bitcrush effect requires the&nbsp;<a
+                href="http://sc3-plugins.sourceforge.net/"
+                >SC3 Plugins</a
+            >&nbsp;to be installed to work.
+        </p>
+
+        <div>
+            <div id="highlighter_922239" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Apply the bit-crusher
+                                            effect</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"X O "</code
+                                        ><code class="python plain"
+                                            >, crush</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Reduce the number of bits for
+                                            more distortion</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"X O "</code
+                                        ><code class="python plain"
+                                            >, crush</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, bits</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Or reduce the sample rate for a
+                                            different style of distortion!</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"X O "</code
+                                        ><code class="python plain"
+                                            >, crush</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">32</code
+                                        ><code class="python plain">, bits</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Distortion</h3>
+
+        <p>Keywords: <code>dist</code></p>
+
+        <p>
+            This requires the&nbsp;<a href="http://sc3-plugins.sourceforge.net/"
+                >SC3 Plugins</a
+            >&nbsp;to be installed. This should be a value between 0 and 1 and
+            distorts the audio signal.
+        </p>
+
+        <div>
+            <div id="highlighter_959692" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Add distortion to both sample and
+                                            synth players</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x * "</code
+                                        ><code class="python plain">, dist</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; dirt([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain"
+                                            >], dist</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.3</code
+                                        ><code class="python plain">, dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">) </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Wave-shape distortion</h3>
+
+        <p>Keywords: <code>shape</code></p>
+
+        <p>
+            This is another type of distortion that affects the shape of the
+            audio signal’s waveform. This value should be between 0 and 1, but
+            larger values are also accepted (be careful with headphones!). This
+            distortion effect does not require any extra installation.
+        </p>
+
+        <div>
+            <div id="highlighter_308616" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Add distortion to both sample and
+                                            synth players</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x * "</code
+                                        ><code class="python plain"
+                                            >, shape</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; dirt([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">5</code
+                                        ><code class="python plain"
+                                            >], shape</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">, dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">) </code
+                                        ><code class="python keyword">+</code>
+                                        <code class="python plain">(</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Overdrive distortion</h3>
+
+        <p>Keywords: <code>drive</code></p>
+
+        <p>
+            A distortion created by amplifying the sound then clipping it at a
+            much more “normal” amplitude. Values should be between 0 and 1 but
+            larger values are accepted.
+        </p>
+
+        <div>
+            <div id="highlighter_651110" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Add overdrive distortion</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; dirt(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain"
+                                            >, drive</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Reverb</h3>
+
+        <p>Keywords: <code>room</code>, <code>mix = 0.1</code></p>
+
+        <p>
+            Use the&nbsp;<code>room</code>&nbsp;keyword to add reverb to a
+            sound. This emulates the effect of playing the sound in a room and
+            can be on a scale from dry (0% mix of the reverberated sound) to wet
+            (100% mix of the reverberated sound).
+            The&nbsp;<code>room</code>&nbsp;keyword sets the size of the room to
+            emulate reverb in, and <code>mix</code> is the percent mix as a
+            fraction (i.e. 0.1 is 10%).
+        </p>
+
+        <div>
+            <div id="highlighter_187791" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Emulate playing the sounds in a
+                                            small room</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x o "</code
+                                        ><code class="python plain">, room</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.25</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Emulate playing the sounds in a
+                                            larger room</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x o "</code
+                                        ><code class="python plain">, room</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.8</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Make the signal more 'wet'</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x o "</code
+                                        ><code class="python plain">, room</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.8</code
+                                        ><code class="python plain">, mix</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.8</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Echo</h3>
+
+        <p>Keywords: <code>echo</code>, <code>echotime = 1</code></p>
+
+        <p>
+            This effect often goes under the name of “<a
+                href="https://en.wikipedia.org/wiki/Comb_filter"
+                >Comb Delay</a
+            >” but applying it to a single sound will give it the effect of
+            echoing in a room. Use the&nbsp;<code>echo</code>&nbsp;keyword to
+            define the duration (in beats) between each repeated sound. The
+            following code plays a single note on repeat but we hear it echoed
+            back to us after 1 beat.
+        </p>
+
+        <div>
+            <div id="highlighter_860018" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; blip(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, echo</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            NOTE: You may sometimes have to add reverb using
+            the&nbsp;<code>room</code>&nbsp;keyword argument to hear the echo
+            effect. This is because a sound is stopped by SuperCollider once it
+            is detected as being silent. If the echo would occur after a period
+            of silence, you will need to add reverb to keep the sound “alive” as
+            it were. Here is an example:
+        </p>
+
+        <div>
+            <div id="highlighter_238777" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># We don't hear any echo
+                                            effect</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, echo</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Add reverb and we do</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, echo</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">, room</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.5</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            By default you will probably only hear one echo of the original
+            sound. To hear more echoes, increase the&nbsp;<code>echotime</code>
+            duration:
+        </p>
+
+        <div>
+            <div id="highlighter_80243" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Only hear one echo</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; blip(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, echo</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Now we hear several</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; blip(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, echo</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain"
+                                            >, echotime</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># We can use echo to make drum
+                                            loops more interesting too</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"(x )( x)o "</code
+                                        ><code class="python plain">, room</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.1</code
+                                        ><code class="python plain">, echo</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python keyword">/</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain"
+                                            >, echotime</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p>
+            Be careful of using too much&nbsp;echo&nbsp;on too many players as
+            it uses a large amount of CPU and can cause SuperCollider to crash.
+        </p>
+
+        <h3>Pan spin</h3>
+
+        <p>Keywords: <code>spin</code></p>
+
+        <p>
+            This effect continually pans the sound from left to right, and back
+            again,&nbsp;‘n’&nbsp;number of times, where&nbsp;‘n’&nbsp;is the
+            value given to the <code>spin</code> keyword. This is dependant on
+            the sustain of the note (given using
+            the&nbsp;<code>sus</code>&nbsp;keyword).
+        </p>
+
+        <div>
+            <div id="highlighter_547994" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Move the pan left to right 4
+                                            times across 4 beats</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pads(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, spin</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Move the pan left to right 4
+                                            times across 1 beat</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pads(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, sus</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">, spin</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Cut</h3>
+
+        <p>Keywords: <code>cut</code></p>
+
+        <p>
+            To stop a sound abruptly (as opposed to just using a
+            shorter&nbsp;<code>sus</code>) you can use
+            the&nbsp;<code>cut</code>&nbsp;keyword. This is especially useful
+            when playing samples using the&nbsp;<code>play</code>&nbsp;SynthDef
+            as&nbsp;<code>sus</code>&nbsp;has no effect on the sound itself. The
+            duration at which the sound is stopped is
+            the&nbsp;<code>cut</code>&nbsp;value as a proportion of
+            the&nbsp;<code>sus</code>&nbsp;value i.e.
+            a&nbsp;<code>cut</code>&nbsp;of 0.5 will stop the sound half way
+            through.
+        </p>
+
+        <div>
+            <div id="highlighter_101908" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Stop a sound immediately instead
+                                            of it's natural decay</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pads(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">, cut</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.75</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        <code class="python spaces">&nbsp;</code
+                                        >&nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Shorten samples to a tenth of
+                                            their normal length</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >d1 &gt;&gt; play(</code
+                                        ><code class="python string"
+                                            >"x-o-"</code
+                                        ><code class="python plain">, cut</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">0.1</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Formant filtter</h3>
+
+        <p>Keywords: <code>formant</code></p>
+
+        <p>
+            This uses SuperCollider’s&nbsp;<a
+                href="http://doc.sccode.org/Classes/Formlet.html"
+                >Formlet</a
+            >&nbsp;class to add a very simple resonance filter to the sound, not
+            dissimilar to TidalCycles “vowel” effect. The values should be
+            between 1 and 7.
+        </p>
+
+        <div>
+            <div id="highlighter_53712" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Loop through the different levels
+                                            we can apply the filter</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck(formant</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">P[:</code
+                                        ><code class="python value">8</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Tremolo</h3>
+
+        <p>Keywords: <code>tremolo</code></p>
+
+        <p>
+            <a href="https://en.wikipedia.org/wiki/Tremolo">Tremolo</a>
+            is the modulation of amplitude, which is done in FoxDot using a sine
+            wave. This oscillates a note’s amplitudes ‘n’ times per beat, where
+            ‘n’ is the input given to the <code>tremolo</code> argument.
+        </p>
+
+        <div>
+            <div id="highlighter_789210" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pads(dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, tremolo</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Pitch shift</h3>
+
+        <p>Keywords: <code>pshift</code></p>
+
+        <p>
+            The shifts the pitch of a note by <code>pshift</code> number of
+            semitones up or down. This also works for samples being used by the
+            <code>play</code> SynthDef.
+        </p>
+
+        <div>
+            <div id="highlighter_657167" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Shift a synth's pitch</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pads(pshift</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number3 index2 alt2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number4 index3 alt1">
+                                        <code class="python comments"
+                                            ># Shift a sample's pitch</code
+                                        >
+                                    </div>
+                                    <div class="line number5 index4 alt2">
+                                        <code class="python plain"
+                                            >p2 &gt;&gt; play(</code
+                                        ><code class="python string">"C"</code
+                                        ><code class="python plain">, dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain"
+                                            >, pshift</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">1</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                    <div class="line number6 index5 alt1">
+                                        &nbsp;
+                                    </div>
+                                    <div class="line number7 index6 alt2">
+                                        <code class="python comments"
+                                            ># Can be used to make chords</code
+                                        >
+                                    </div>
+                                    <div class="line number8 index7 alt1">
+                                        <code class="python plain"
+                                            >p2 &gt;&gt; play(</code
+                                        ><code class="python string">"C"</code
+                                        ><code class="python plain">, dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">2</code
+                                        ><code class="python plain"
+                                            >, pshift</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, (</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain"
+                                            >)], sample</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">3</code
+                                        ><code class="python plain">)</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h3>Glide</h3>
+
+        <p>Keywords: <code>glide</code>, <code>glidedelay = 0.5</code></p>
+
+        <p>
+            Glide, sometimes known as
+            <a href="https://en.wikipedia.org/wiki/Glissando">glissando</a>, is
+            very similar to the “slide” effect except that you specify the
+            number of semitones to slide instead of the frequency multiplier. In
+            future this may be replaced by the number of steps in the scale for
+            consistency.
+        </p>
+
+        <div>
+            <div id="highlighter_524867" class="syntaxhighlighter python">
+                <table cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="code">
+                                <div class="container">
+                                    <div class="line number1 index0 alt2">
+                                        <code class="python comments"
+                                            ># Glide to and from the 5th note in
+                                            the scale (7th semitone)</code
+                                        >
+                                    </div>
+                                    <div class="line number2 index1 alt1">
+                                        <code class="python plain"
+                                            >p1 &gt;&gt; pluck([</code
+                                        ><code class="python value">0</code
+                                        ><code class="python plain">, </code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain">], dur</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python value">4</code
+                                        ><code class="python plain"
+                                            >, glide</code
+                                        ><code class="python keyword">=</code
+                                        ><code class="python plain">[</code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">,</code
+                                        ><code class="python keyword">-</code
+                                        ><code class="python value">7</code
+                                        ><code class="python plain">])</code>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- .entry-content -->
+</article>
