@@ -1,0 +1,49 @@
+.post-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 48px 0;
+
+  &--item {
+    margin-bottom: 24px;
+  }
+
+  &--link {
+    @extend %title;
+    display: block;
+    text-decoration: none;
+    border-bottom: 0;
+    margin-bottom: 7px;
+
+    &:hover {
+      animation: rainbow-flash-color $rainbow-flash-duration infinite;
+    }
+  }
+
+  &--meta {
+    @extend %little-text;
+    margin-top: 3px;
+    color: $coal;
+  }
+
+  &--tag {
+    color: $black;
+    padding: 1px 5px 0;
+    border: 1px solid $coal;
+    border-radius: 4px;
+
+    &.-podcast {
+      border-color: $bright-red; 
+      color: $bright-red;
+    }
+
+    &.-print {
+      border-color: $plum; 
+      color: $plum;
+    }
+
+    &.-zine {
+      border-color: $indigo; 
+      color: $indigo;
+    }
+  }
+}

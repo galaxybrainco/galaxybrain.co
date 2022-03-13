@@ -57,3 +57,4 @@ $rainbow-flash-duration: 1s;
 
 @include generate-rainbow-flash(border-color);
 @include generate-rainbow-flash(color);
+@include generate-rainbow-flash(background-color);

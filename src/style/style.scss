@@ -1,11 +1,20 @@
 @import './reset.scss';
 @import './colors.scss';
 @import './animation.scss';
+@import './post-list.scss';
+@import './post.scss';
 
 %little-text {
     font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+%title {
+    font-family: 'Gooper';
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 36px;
 }
 
 body {
@@ -98,7 +107,7 @@ main {
         0 3px 4px rgba(0, 0, 4, 0.17),
         0 2px 34px rgba(0, 0, 6, 0.15);
     background-image: linear-gradient(rgba($blue, 0.1) .07em, transparent .07em);
-    background-size: 100% 25.5px;
+    background-size: 100% 24px;
     background-position: 0 26px;
 
     transform: rotate(-0.5deg);
@@ -106,6 +115,7 @@ main {
     &:after {
         content: '';
         position: absolute;
+        z-index: 0;
         bottom: 0;
         left: 0;
         right: 0;
@@ -125,11 +135,22 @@ main {
             content: '';
             position: absolute;
             bottom: -10px;
+            z-index: 0;
             left: 0;
             right: 0;
             height: 8px;
             background-color: $white;
         }
+    }
+
+    &-body {
+      margin-top: -4px;
+    }
+
+    p {
+      + p {
+        margin-top: 24px;
+      }
     }
 }
 
@@ -154,4 +175,38 @@ main {
     &:visited {
         animation: rainbow-flash-border-color $rainbow-flash-duration infinite;
     }
+}
+
+.site-navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  margin: 32px 0;
+
+  a {
+    @extend %little-text;
+    border-bottom: 0;
+
+    color: $white;
+    background: $black;
+    padding: 1px 5px 0;
+    border-radius: 4px;
+
+    &:hover {
+      animation: rainbow-flash-background-color $rainbow-flash-duration infinite;
+    }
+
+    + a {
+      margin-left: 1.5em;
+    }
+
+    &.-current {
+      background: $white;
+      box-shadow: 0 0 0 1px $black;
+      color: $black;
+
+      pointer-events: none;
+    }
+  }
 }
