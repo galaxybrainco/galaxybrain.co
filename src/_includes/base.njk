@@ -20,8 +20,17 @@
         </a>
     </header>
     {% endblock %}
-    {% block content %}
-    {% endblock %}
+    <nav class="site-navigation">
+      <a class="{% if page.fileSlug == '' %}-current{% endif %}" href="/">Home</a>
+      <a href="https://galaxybrain.bigcartel.com/">Shop</a>
+      <a class="{% if page.fileSlug == 'projects' %}-current{% endif %}" href="/projects">Projects</a>
+      <a class="{% if page.fileSlug == 'services' %}-current{% endif %}" href="/services">Services</a>
+    </nav>
+    <main>
+    <!-- Grab the content from the page data, dump it here, and mark it as safe -->
+    <!-- Safe docs: https://mozilla.github.io/nunjucks/templating.html#safe -->
+    {{ content | safe }}
+    </main>
     {% block scripts %}
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script data-goatcounter="https://galaxybrain.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

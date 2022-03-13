@@ -1,73 +1,37 @@
-{% extends "layouts/base.njk" %}
-{% block content %}
-<main>
-    <p>
-        <strong>Galaxy Brain</strong> is a creative studio, small press,
-        and Risograph printing concern in the Bay Area. Galaxy Brain is
-        run by <a href="http://phildini.net">Philip James</a> and
-        <a href="http://liamcampbell.info">Liam Campbell</a>.
-    </p>
-    <div class="news-container">
-        <h2 class="news-container-header">
-            Weird News From Good Boys / Vice Versa
-        </h2>
-        <p>
-            We are proud to announce our least lucrative idea to date,
-            <a href="/library.html">The Galaxy Brain Printing Library</a>.
-            In accordance with our library socialist ideals, we are
-            experimentally providing free Risograph and 3D printing
-            services to our neighbors in the Bay Area.
-        </p>
-        <p>
-            <em>
-                The Galaxy Brain Printing Library — <br />
-                It&rsquo;s Free, What More Could You Want&trade;
-            </em>
-        </p>
+---
+layout: base.njk
+title: Galaxy Brain
+pagination:
+  data: collections.blog
+  size: 50
+  reverse: true
+  alias: posts
+---
+
+<section class="news-container">
+  <h2 class="news-container-header">Hello, Weary Travelers</h2>
+  <div class="news-container-body">
+  <p>
+  Galaxy Brain is an arts and technology collective belonging to Philip James and Rosemary Campbell.
+  We make Risograph prints and zines, podcasts, software, music, films, and honestly anything else we feel like.
+  </p>
+  <p>
+  <a href="mailto:hello@galaxybrain.co">Get in touch</a> to collaborate with us.
+  </p>
+</section>
+
+<ul class="post-list">
+{% for post in posts %}
+  <li class="post-list--item">
+    <a class="post-list--link" href="{{ post.url }}">{{ post.data.title | smartquotes | safe }}</a>
+    <div class="post-list--deck">
+      {{ post.data.deck }}
     </div>
-    <h2>Our Work</h2>
-    <p>
-        We make everything from zines about wine to telephony apps for
-        podcasters. You can see the full set of what we do on our
-        <a href="/projects.html">Projects page</a>
-    </p>
-    <p>
-        We also partner with other folks to publish their zines, print
-        their art, and make things happen. It&rsquo;s all available on
-        our store.
-    </p>
-    <div class="cta-container">
-        <a class="button" href="https://shop.galaxybrain.co"
-            ><ion-icon name="cart"></ion-icon> Buy Stuff</a
-        >
+    <div class="post-list--meta">
+    <span class="post-list--item-date">{{ post.date | postDate }}</span>
+    &middot;
+    <span class="post-list--item-author">{{ post.data.author }}</span>
     </div>
-    <h2>Behind The Scenes</h2>
-    <p>
-        It makes us happy to share our work with people&mdash;not just
-        the end products, but the process as well. We thoroughly
-        document our work (and its tribulations) on Instagram and in our
-        newsletter, <strong>Action Potential</strong>.
-    </p>
-    <div class="cta-container">
-        <a
-            class="button"
-            href="https://www.instagram.com/galaxybrainco/"
-            ><ion-icon name="logo-instagram"></ion-icon> Follow</a
-        >
-        <a class="button" href="https://buttondown.email/galaxybrain"
-            ><ion-icon name="mail-open"></ion-icon> Subscribe</a
-        >
-    </div>
-    <h2>Work With Us</h2>
-    <p>
-        If you want to get something beautiful and strange out into the
-        world, we want to work with you. Give us as little or as much
-        information as you have.
-    </p>
-    <div class="cta-container">
-        <a class="button" href="https://airtable.com/shrTmzKNRZnMkA9ET"
-            ><ion-icon name="send"></ion-icon> Contact Us</a
-        >
-    </div>
-</main>
-{% endblock %}
+  </li>
+{% endfor %}
+</ul>
