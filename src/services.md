@@ -3,7 +3,13 @@ layout: base.njk
 title: Services
 ---
 
-# Services
+# Stuff we like to do
+
+* Risograph printing (it's totally free for folks near us, up to a limit)
+* 3D printing (again, totally free for our neighbors with small projects)
+* Audio production (we produce our own podcasts, and some others)
+* Music on commission (we write theme songs!)
+* Software design and implementation (if you twist our arm about it, and/or you have an idea that is so bonkers we want it to exist as much as you)
 
 <section class="news-container">
   <h2 class="news-container-header">Let&rsquo;s Get Weird</h2>
@@ -18,10 +24,3 @@ title: Services
   </p>
 </section>
 
-## Stuff we like to do
-
-* Risograph printing (it's totally free for folks near us, up to a limit)
-* 3D printing (again, totally free for our neighbors with small projects)
-* Audio production (we produce our own podcasts, and some others)
-* Music on commission (we write theme songs!)
-* Software design and implementation (if you twist our arm about it, and/or you have an idea that is so bonkers we want it to exist as much as you)
