@@ -7,5 +7,5 @@ layout: base.njk
 <span class="post-date">{{ page.date | postDate }}</span> &middot; <span class="post-author">{{ author }}</span>
 </div>
 <article class="post">
-  {{ content | safe }}
+  {{ content | smartquotes | safe }}
 </article>
