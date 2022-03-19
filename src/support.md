@@ -18,5 +18,5 @@ We release work and perform services for free when it makes sense to do so; this
 If you feel moved to support Galaxy Brain in the abstract, to fuel whatever fires keep Philip and Rosemary going without a specific project focus, you're also welcome to do so here:
 
 <div class="cta-container">
-  <a class="button" href="https://buy.stripe.com/5kAaGffkS2JZ5Ve6oq"><ion-icon name="mic"></ion-icon> Support Brain Tape</a>
+  <a class="button" href="https://buy.stripe.com/5kAaGffkS2JZ5Ve6oq"><ion-icon name="cash"></ion-icon> Support Galaxy Brain</a>
 </div>
