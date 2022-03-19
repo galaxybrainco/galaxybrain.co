@@ -6,7 +6,7 @@ module.exports = function (config) {
   config.addPassthroughCopy('src/CNAME');
 
   config.addFilter("postDate", (dateObj) => {
-    return DateTime.fromJSDate(dateObj).toLocaleString(DateTime.DATE_MED);
+    return DateTime.fromJSDate(dateObj, { zone: "UTC" }).toLocaleString(DateTime.DATE_MED);
   });
 
   config.addFilter("smartquotes", (post) => {
