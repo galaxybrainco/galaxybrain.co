@@ -12,5 +12,5 @@ We release work and perform services for free when it makes sense to do so; this
 </div>
 
 <div class="cta-container">
-  <a class="button" href=""><ion-icon name="mic"></ion-icon> Support Brain Tape</a>
+  <a class="button" href="https://buy.stripe.com/3csdSr5Ki70fbfy7st"><ion-icon name="mic"></ion-icon> Support Brain Tape</a>
 </div>
