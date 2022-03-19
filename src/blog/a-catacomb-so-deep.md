@@ -3,6 +3,7 @@ layout: post.njk
 title: You Can Know a Catacomb so Deep There Ain't No Goodbyes
 deck: Obsession as a transmissible condition
 author: Rosemary
+date: 2022-03-19
 tags: blog
 ---
 

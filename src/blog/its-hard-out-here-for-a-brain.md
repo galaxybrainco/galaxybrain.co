@@ -3,6 +3,7 @@ layout: post.njk
 title: It's Hard Out Here for a Brain
 deck: Please, we beg of you, don't call it a comeback
 author: Philip
+date: 2022-03-13
 tags: blog
 ---
 
