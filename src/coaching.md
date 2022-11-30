@@ -14,7 +14,7 @@ title: Coaching
   <h2 class="news-container-header">Daniel G., Engineering Manager</h2>
   <div class="news-container-body">
   <p>
-  I have been working with Philip for a year now and [he] has helped me unlock many new management traits and skills. [He's] is a trusted advisor and I don't think I would be where I am today, managing a team of 10 engineers, without his help. I would highly recommend Philip's management consulting to anyone who is looking to get to the next step in their career!
+  I have been working with Philip for a year now and [he] has helped me unlock many new management traits and skills. [He's] a trusted advisor and I don't think I would be where I am today, managing a team of 10 engineers, without his help. I would highly recommend Philip's management consulting to anyone who is looking to get to the next step in their career!
   </p>
 </section>
 
@@ -38,7 +38,7 @@ title: Coaching
 
 ## Who we are
 
-We're <a href="https://www.linkedin.com/in/phildini/">Philip James</a> and <a href="https://www.linkedin.com/in/rosemarydotworld/">Rosemary Campbell</a>, two Bay Area natives who have stood astride the intersection of technology, arts, and leadership for multiple decades. We have run engineering teams, run engineering organizations, managed creative projects, produced podcasts and zines and music and webcomics, and studied with industry leaders across the country on how to do all of this as in the most human way possible. We want to share that with you.
+We're <a href="https://www.linkedin.com/in/phildini/">Philip James</a> and <a href="https://www.linkedin.com/in/rosemarydotworld/">Rosemary Campbell</a>, two Bay Area natives who have stood astride the intersection of technology, arts, and leadership for multiple decades. We have run engineering teams, run engineering organizations, managed creative projects, produced podcasts and zines and music and webcomics, and studied with industry leaders across the country on how to do all of this in the most human way possible. We want to share that with you.
 
 <section class="news-container">
   <h2 class="news-container-header">Max G, Senior Software Engineer</h2>
