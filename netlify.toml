@@ -1,0 +1,17 @@
+[[redirects]]
+from = "/.well-known/webfinger"
+to = "https://the.galaxybrain.co/.well-known/webfinger"
+status = 200
+force = true
+
+[[redirects]]
+from = "/.well-known/nodeinfo"
+to = "https://the.galaxybrain.co/.well-known/nodeinfo"
+status = 200
+force = true
+
+[[redirects]]
+from = "/.well-known/host-meta"
+to = "https://the.galaxybrain.co/.well-known/host-meta"
+status = 200
+force = true
