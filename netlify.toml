@@ -15,3 +15,15 @@ from = "/.well-known/host-meta"
 to = "https://the.galaxybrain.co/.well-known/host-meta"
 status = 200
 force = true
+
+[[redirects]]
+from = "/js/script.js"
+to = "https://plausible.io/js/script.js"
+status = 200
+force = true
+
+[[redirects]]
+from = "/api/event"
+to = "https://plausible.io/api/event"
+status = 200
+force = true
