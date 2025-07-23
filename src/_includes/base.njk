@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Galaxy Brain</title>
+        <title>Galaxy Brain 🌌🧠 {{ title }}</title>
         <style>{% include "css/style.css" ignore missing %}</style>
     </head>
     <body>
@@ -22,10 +22,9 @@
     {% endblock %}
     <nav class="site-navigation">
       <a class="{% if page.fileSlug == '' %}-current{% endif %}" href="/">Home</a>
-      <a href="https://galaxybrain.bigcartel.com/">Shop</a>
       <a class="{% if page.fileSlug == 'projects' %}-current{% endif %}" href="/projects">Projects</a>
       <a class="{% if page.fileSlug == 'services' %}-current{% endif %}" href="/services">Services</a>
-      <a class="{% if page.fileSlug == 'llm-applications' %}-current{% endif %}" href="/llm-applications">AI Development</a>
+      <a class="{% if page.fileSlug == 'llm-applications' %}-current{% endif %}" href="/production-ai">Production AI</a>
       <a class="{% if page.fileSlug == 'support' %}-current{% endif %}" href="/support">Support</a>
     </nav>
     <main>

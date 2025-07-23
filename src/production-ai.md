@@ -28,10 +28,10 @@ Galaxy Brain specializes in the one thing everyone else avoids: turning working 
 ## What We Do
 
 **Prototype Forensics**
-We reverse-engineer what you built to understand why it works. AI-generated code is often brilliant but fragile. We identify the genius worth keeping and the chaos that needs fixing.
+We dive deep into what you built to understand why it works. AI-generated code is often brilliant but fragile. We identify the genius worth keeping and the chaos that needs fixing.
 
 **Production Infrastructure**
-AWS deployment with monitoring, error handling, and security that won't crumble under real traffic. Battle-tested architecture, not over-engineered monuments.
+Bulletproof deployment with monitoring, error handling, and security that won't crumble under real traffic. Battle-tested architecture, not over-engineered monuments.
 
 **Scale-Ready Engineering**
 Database design, API architecture, authentication, performance optimization. The boring foundation work that lets your breakthrough idea handle real users and real money.
@@ -40,40 +40,32 @@ Database design, API architecture, authentication, performance optimization. The
 Every line of code is a business decision. We help you prioritize what builds value and avoid the technical debt that kills startups.
 
 <section class="news-container">
-  <h2 class="news-container-header">Our Approach</h2>
+  <h2 class="news-container-header">Our Process</h2>
   <div class="news-container-body">
-  <p>
-  We don't just rewrite your code. We understand what you built and why it works, then figure out how to make it production-ready while preserving what makes it valuable.
-  </p>
-  <p>
-  Every decision balances immediate needs with long-term sustainability. We're building for both "does this work today?" and "will this work when you have real traffic?"
-  </p>
+  
+  **1. Prototype Deep Dive**
+  We spelunk your prototype to understand what you built and why it works. This means reverse-engineering the logic, mapping the data flow, and separating brilliance from chaos.
+
+  **2. Production Architecture**
+  We design the production system for your actual needs and realistic growth. No over-engineering. No cutting corners. Just solid systems that scale.
+
+  **3. Sprint Development**
+  Short cycles, weekly demos, constant feedback. You see real progress every week and we adapt as we learn what actually matters.
+
+  **4. Knowledge Transfer**
+  We don't just deploy and vanish. Complete documentation, training, and ongoing support until you're confident running and growing the system yourself.
 </section>
 
 ## Why Galaxy Brain
 
 **AI Systems Expertise**
-I understand how LLMs work and where they break. I've shipped AI features to production and debugged the specific nightmares of AI-generated code—the inconsistencies, edge cases, and magic that stops working at 3 AM.
+I know how LLMs work and where they break. I've shipped AI features to production and debugged the specific nightmares of AI-generated code—the inconsistencies, edge cases, and magic that stops working at 3 AM.
 
 **Battle-Tested Engineering**
-Decade+ in engineering leadership, AWS certified, core contributor to open source projects like BeeWare. I've guided dozens of prototypes to production and memorized every way they can fail.
+<a href=https://linkedin.com/in/phildini>Decade+</a> in <a href="/coaching">engineering leadership</a>, AWS certified, core contributor to open source projects like BeeWare. I've guided dozens of prototypes to production and burned into my brain all the ways they can fail.
 
 **Business-First Thinking**
-Every technical decision is a business bet. I've lived the full journey from prototype to profitable product. I know how to balance moving fast with building something that lasts.
-
-## Process
-
-**1. Prototype Archaeology**
-We excavate your prototype to understand what you built and why it works. This means reverse-engineering the logic, mapping the data flow, and separating brilliance from chaos.
-
-**2. Production Architecture**
-We design the production system for your actual needs and realistic growth. No over-engineering. No cutting corners. Just solid systems that scale.
-
-**3. Sprint Development**
-Short cycles, weekly demos, constant feedback. You see real progress every week and we adapt as we learn what actually matters.
-
-**4. Knowledge Transfer**
-We don't just deploy and vanish. Complete documentation, training, and ongoing support until you're confident running and growing the system yourself.
+Every technical decision is a business bet. I've lived the full journey from prototype to shipped product. I know how to balance moving fast with building something that lasts.
 
 ## Get Started
 
